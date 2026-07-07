@@ -1,30 +1,45 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 
+const MAX_FAILS = 3;
+const RICK_URL  = "https://youtu.be/SCaAetNzXIc?si=dkrHMfTrTgvxC99H";
+
 export default function LoginScreen() {
-  const [email,   setEmail]   = useState("");
-  const [pass,    setPass]    = useState("");
-  const [error,   setError]   = useState(false);
-  const [errMsg,  setErrMsg]  = useState("Email atau password salah");
-  const [shake,   setShake]   = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [email,    setEmail]   = useState("");
+  const [pass,     setPass]    = useState("");
+  const [error,    setError]   = useState(false);
+  const [errMsg,   setErrMsg]  = useState("Email atau password salah");
+  const [shake,    setShake]   = useState(false);
+  const [loading,  setLoading] = useState(false);
+  const failCount = useRef(0);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const doLogin = useCallback(async () => {
     if (!email || !pass) { triggerError("Email dan password wajib diisi"); return; }
-    if (!executeRecaptcha) { triggerError("reCAPTCHA belum siap, coba lagi"); return; }
+    if (!executeRecaptcha)  { triggerError("reCAPTCHA belum siap, coba lagi"); return; }
 
     setLoading(true);
     try {
-      // Jalankan reCAPTCHA v3 secara invisible
       await executeRecaptcha("login");
       await signInWithEmailAndPassword(auth, email, pass);
+      // sukses — reset counter
+      failCount.current = 0;
     } catch {
       setPass("");
-      triggerError("Email atau password salah");
+      failCount.current += 1;
+
+      if (failCount.current >= MAX_FAILS) {
+        // Buka di tab baru (bukan replace, bukan fullscreen)
+        window.open(RICK_URL, "_blank", "noopener,noreferrer");
+        failCount.current = 0;
+        triggerError("Terlalu banyak percobaan gagal. Silakan coba lagi nanti.");
+      } else {
+        const sisa = MAX_FAILS - failCount.current;
+        triggerError(`Email atau password salah. Sisa percobaan: ${sisa}`);
+      }
     }
     setLoading(false);
   }, [email, pass, executeRecaptcha]);
@@ -33,7 +48,7 @@ export default function LoginScreen() {
     setErrMsg(msg);
     setError(true);
     setShake(true);
-    setTimeout(() => setError(false), 2500);
+    setTimeout(() => setError(false), 3000);
     setTimeout(() => setShake(false), 400);
   }
 
