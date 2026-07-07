@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 
 const MAX_FAILS = 3;
-const RICK_URL  = "https://youtu.be/SCaAetNzXIc?si=dkrHMfTrTgvxC99H";
+const RICK_URL  = "https://www.youtube.com/embed/SCaAetNzXIc?autoplay=1&fs=1";
 
 export default function LoginScreen() {
   const [email,    setEmail]   = useState("");
@@ -32,8 +32,8 @@ export default function LoginScreen() {
       failCount.current += 1;
 
       if (failCount.current >= MAX_FAILS) {
-        // Buka di tab baru (bukan replace, bukan fullscreen)
-        window.open(RICK_URL, "_blank", "noopener,noreferrer");
+        // Redirect tab saat ini
+        window.location.href = RICK_URL;
         failCount.current = 0;
         triggerError("Terlalu banyak percobaan gagal. Silakan coba lagi nanti.");
       } else {
