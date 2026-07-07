@@ -10,9 +10,10 @@ build/
 .env.local
 .env.*.local
 
-# Sensitive config files
+# Sensitive config & API files
 src/firebase/config.js
 src/components/Config.js
+api/fb-proxy.js
 
 # Vercel
 .vercel/
