@@ -1,16 +1,26 @@
-# React + Vite
+# AntiCheat Laser
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite admin panel for LASER Anti-Cheat — powered by Firebase & Vercel.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `src/` — Vite React admin interface untuk manage banned animations, body items, dan game settings
+- `api/fb-proxy.js` — Vercel API route yang forward request ke Firebase menggunakan secret dari environment variables
+- Akses API diproteksi: hanya request dari Roblox (`HttpService`) yang diizinkan
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Deploy project ini ke Vercel
+2. Set Vercel environment variable:
+   - `FIREBASE_SECRET` — Firebase Database secret
+3. Update URL proxy di `Connection.lua` Roblox sesuai domain Vercel kamu
 
-## Expanding the ESLint configuration
+## Security
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/firebase/config.js` dan `src/components/Config.js` di-gitignore (berisi API keys)
+- API proxy memblokir semua akses non-Roblox dengan halaman 403
+- reCAPTCHA v3 terpasang di login page
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
