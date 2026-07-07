@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+
+# Sensitive config files
+src/firebase/config.js
+src/components/Config.js
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vite cache
+.cache/

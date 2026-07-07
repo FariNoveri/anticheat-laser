@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "games": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "global": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "banned_animations": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "banned_avatars": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
