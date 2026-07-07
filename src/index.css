@@ -221,13 +221,77 @@ td { padding: 12px 16px; font-family: var(--mono); font-size: 12px; vertical-ali
 .set-btn:active { transform: scale(0.98); }
 .set-btn.pushing { background: #555; color: #999; cursor: not-allowed; }
 
-@media (max-width: 640px) {
-  .container { padding: 0 14px; }
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
   main { padding: 20px 0 80px; }
+
+  /* Header */
+  .header-inner { flex-wrap: wrap; gap: 6px; }
   .logo-text { font-size: 15px; }
-  .stats-row { grid-template-columns: repeat(2,1fr); }
+  .header-status { font-size: 10px; gap: 6px; flex-wrap: wrap; }
+
+  /* Nav tabs — horizontal scroll */
+  .nav-tabs { gap: 0; }
+  .nav-tab { font-size: 10px; padding: 10px 12px; letter-spacing: 1px; }
+
+  /* Stats */
+  .stats-row { grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 20px; }
   .stat-value { font-size: 20px; }
-  td, th { padding: 10px 12px; font-size: 11px; }
-  .modal { padding: 20px 16px; }
+  .stat-label { font-size: 9px; }
+
+  /* Toolbar */
+  .toolbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .toolbar-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+
+  /* Table — horizontal scroll, smaller font */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 520px; }
+  th { font-size: 9px; padding: 10px 12px; }
+  td { font-size: 11px; padding: 10px 12px; }
+
+  /* Buttons — easier tap targets */
+  .btn { padding: 9px 14px; font-size: 11px; }
+  .btn.sm { padding: 6px 10px; font-size: 10px; }
+
+  /* Modal */
+  .modal { padding: 20px 16px; width: min(100%, 460px); }
+  .modal-actions { justify-content: stretch; }
+  .modal-actions .btn { flex: 1; text-align: center; }
+
+  /* Force push bar */
+  .force-push-bar { flex-direction: column; align-items: flex-start; padding: 14px 16px; }
+  .set-btn { width: 100%; text-align: center; padding: 12px; }
+
+  /* Punishment grid */
   .punish-mode-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Global section */
+  .global-header { flex-direction: column; align-items: flex-start; }
+  .global-toggle-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  /* Login */
+  .login-box { padding: 28px 20px; }
+  .login-title { font-size: 18px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 12px; }
+
+  /* Stats — single col on very small screens */
+  .stats-row { grid-template-columns: repeat(2,1fr); }
+
+  /* Header — hide "by Fari Noveri" label */
+  .header-status span:nth-child(3),
+  .header-status span:nth-child(4) { display: none; }
+
+  /* Nav tabs shrink more */
+  .nav-tab { font-size: 9px; padding: 9px 10px; }
+
+  /* Buttons full width in modals */
+  .modal-actions { flex-direction: column; }
+  .modal-actions .btn { width: 100%; }
+
+  /* Login box full width */
+  .login-box { width: 100%; padding: 24px 16px; }
+  .login-btn { padding: 14px; }
 }
