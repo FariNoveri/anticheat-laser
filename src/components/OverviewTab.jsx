@@ -49,6 +49,11 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [webhookNotifAnim,   setWNN] = useState(true);
   const [webhookReasonAvatar, setWRA] = useState("");
   const [webhookReasonAnim,   setWRN] = useState("");
+  const [webhookTitleAvatar, setWTA] = useState("");
+  const [webhookColorAvatar, setWCA] = useState("");
+  const [webhookTitleAnim,   setWTN] = useState("");
+  const [webhookColorAnim,   setWCN] = useState("");
+  const [webhookFooter,      setWF]  = useState("");
 
   useEffect(() => {
     return onValue(ref(db, "global"), (snap) => {
@@ -64,6 +69,11 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       setWNN(d.webhook_notify_anim   !== false);
       if (d.webhook_reason_avatar) setWRA(d.webhook_reason_avatar);
       if (d.webhook_reason_anim)   setWRN(d.webhook_reason_anim);
+      if (d.webhook_title_avatar)  setWTA(d.webhook_title_avatar);
+      if (d.webhook_color_avatar)  setWCA(d.webhook_color_avatar);
+      if (d.webhook_title_anim)    setWTN(d.webhook_title_anim);
+      if (d.webhook_color_anim)    setWCN(d.webhook_color_anim);
+      if (d.webhook_footer)        setWF(d.webhook_footer);
     });
   }, []);
 
@@ -186,7 +196,19 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
 
           {msgRow("Custom Reason — Avatar Notif", "Penggunaan avatar item yang dilarang", webhookReasonAvatar, setWRA, "webhook_reason_avatar",
             { borderColor: "#5865F2", color: "#5865F2" })}
+          {msgRow("Custom Title — Avatar Notif", "🚨 Player — Banned Avatar Item", webhookTitleAvatar, setWTA, "webhook_title_avatar",
+            { borderColor: "#5865F2", color: "#5865F2" })}
+          {msgRow("Custom Color (Hex) — Avatar Notif", "e.g. #ff0000", webhookColorAvatar, setWCA, "webhook_color_avatar",
+            { borderColor: "#5865F2", color: "#5865F2" })}
+
           {msgRow("Custom Reason — Anim Notif", "Penggunaan animasi yang dilarang", webhookReasonAnim, setWRN, "webhook_reason_anim",
+            { borderColor: "#5865F2", color: "#5865F2" })}
+          {msgRow("Custom Title — Anim Notif", "🚨 Player — Banned Animation", webhookTitleAnim, setWTN, "webhook_title_anim",
+            { borderColor: "#5865F2", color: "#5865F2" })}
+          {msgRow("Custom Color (Hex) — Anim Notif", "e.g. #ffaa00", webhookColorAnim, setWCN, "webhook_color_anim",
+            { borderColor: "#5865F2", color: "#5865F2" })}
+
+          {msgRow("Custom Footer — Notif", "Atlas Club Anti-Cheat", webhookFooter, setWF, "webhook_footer",
             { borderColor: "#5865F2", color: "#5865F2" })}
         </div>
       </div>

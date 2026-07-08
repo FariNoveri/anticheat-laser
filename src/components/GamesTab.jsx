@@ -19,6 +19,11 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
   const [wNotifAnim,   setWNN]          = useState(true);
   const [wReasonAvatar,setWRA]          = useState("");
   const [wReasonAnim,  setWRN]          = useState("");
+  const [wTitleAvatar, setWTA]          = useState("");
+  const [wColorAvatar, setWCA]          = useState("");
+  const [wTitleAnim,   setWTN]          = useState("");
+  const [wColorAnim,   setWCN]          = useState("");
+  const [wFooter,      setWF]           = useState("");
   const [expiryPreview,setExpiryPreview]= useState("");
   const inputRef = useRef(null);
 
@@ -39,6 +44,11 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setWNN(g.webhook_notify_anim   !== false);
       setWRA(g.webhook_reason_avatar  || "");
       setWRN(g.webhook_reason_anim    || "");
+      setWTA(g.webhook_title_avatar   || "");
+      setWCA(g.webhook_color_avatar   || "");
+      setWTN(g.webhook_title_anim     || "");
+      setWCN(g.webhook_color_anim     || "");
+      setWF(g.webhook_footer          || "");
       const exp = g.expiry || 0;
       setDuration(exp === 0 ? "0" : "custom");
       setCustomExpiry(exp > 0 ? new Date(exp * 1000).toISOString().slice(0, 16) : "");
@@ -48,6 +58,7 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setDuration("0"); setCustomExpiry("");
       setKmAvatar(""); setKmAnim(""); setWebhookUrl("");
       setWNA(true); setWNN(true); setWRA(""); setWRN("");
+      setWTA(""); setWCA(""); setWTN(""); setWCN(""); setWF("");
     }
   }, [show, editingGame]);
 
@@ -87,6 +98,11 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       ...(webhookUrl  && { webhook_url:            webhookUrl }),
       ...(wReasonAvatar && { webhook_reason_avatar: wReasonAvatar }),
       ...(wReasonAnim   && { webhook_reason_anim:   wReasonAnim }),
+      ...(wTitleAvatar  && { webhook_title_avatar:  wTitleAvatar }),
+      ...(wColorAvatar  && { webhook_color_avatar:  wColorAvatar }),
+      ...(wTitleAnim    && { webhook_title_anim:    wTitleAnim }),
+      ...(wColorAnim    && { webhook_color_anim:    wColorAnim }),
+      ...(wFooter       && { webhook_footer:        wFooter }),
     };
     onSave(gameId, data);
   };
@@ -164,8 +180,26 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
           <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
             value={wReasonAvatar} onChange={(e) => setWRA(e.target.value)} />
           <label className="modal-label">Custom Reason Anim</label>
-          <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
             value={wReasonAnim} onChange={(e) => setWRN(e.target.value)} />
+
+          <label className="modal-label">Custom Title Avatar</label>
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+            value={wTitleAvatar} onChange={(e) => setWTA(e.target.value)} />
+          <label className="modal-label">Custom Color Avatar</label>
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong (cth: #ff0000)"
+            value={wColorAvatar} onChange={(e) => setWCA(e.target.value)} />
+
+          <label className="modal-label">Custom Title Anim</label>
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+            value={wTitleAnim} onChange={(e) => setWTN(e.target.value)} />
+          <label className="modal-label">Custom Color Anim</label>
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong (cth: #ffaa00)"
+            value={wColorAnim} onChange={(e) => setWCN(e.target.value)} />
+
+          <label className="modal-label">Custom Footer</label>
+          <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Biarkan kosong"
+            value={wFooter} onChange={(e) => setWF(e.target.value)} />
         </div>
 
         <label className="modal-label" style={{ marginTop: 16 }}>Custom Kick Message — Avatar</label>
