@@ -158,7 +158,7 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
         <div className="webhook-block">
           <span className="webhook-label">🔔 Discord Webhook Override (per game)</span>
           <label className="modal-label">Webhook URL <span style={{ color: "var(--muted)" }}>(kosong = pakai global)</span></label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong pakai global"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: Menggunakan URL Global"
             value={webhookUrl} onChange={(e) => setWebhookUrl(e.target.value)} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
             <div>
@@ -177,28 +177,28 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
             </div>
           </div>
           <label className="modal-label">Custom Reason Avatar</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: Penggunaan avatar item yang dilarang"
             value={wReasonAvatar} onChange={(e) => setWRA(e.target.value)} />
           <label className="modal-label">Custom Reason Anim</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: Penggunaan animasi yang dilarang"
             value={wReasonAnim} onChange={(e) => setWRN(e.target.value)} />
 
           <label className="modal-label">Custom Title Avatar</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: 🚨 Player — Banned Avatar Item"
             value={wTitleAvatar} onChange={(e) => setWTA(e.target.value)} />
           <label className="modal-label">Custom Color Avatar</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong (cth: #ff0000)"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: #e74c3c (Merah)"
             value={wColorAvatar} onChange={(e) => setWCA(e.target.value)} />
 
           <label className="modal-label">Custom Title Anim</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: 🚨 Player — Banned Animation"
             value={wTitleAnim} onChange={(e) => setWTN(e.target.value)} />
           <label className="modal-label">Custom Color Anim</label>
-          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Biarkan kosong (cth: #ffaa00)"
+          <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Default: #ff8e10 (Oranye)"
             value={wColorAnim} onChange={(e) => setWCN(e.target.value)} />
 
           <label className="modal-label">Custom Footer</label>
-          <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Biarkan kosong"
+          <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Default: LASER Anti-Cheat"
             value={wFooter} onChange={(e) => setWF(e.target.value)} />
         </div>
 
