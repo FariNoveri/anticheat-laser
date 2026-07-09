@@ -6,7 +6,7 @@ export default function AnnounceTab({ allGames, showToast }) {
   const [targetType, setTargetType] = useState("global"); // global, selected, single
   const [selectedGames, setSelectedGames] = useState([]);
   const [singleGameId, setSingleGameId] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("AntiCheat Updated dalam 24 jam");
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSend = async () => {
