@@ -7,6 +7,7 @@ export default function AnnounceTab({ allGames, showToast }) {
   const [selectedGames, setSelectedGames] = useState([]);
   const [singleGameId, setSingleGameId] = useState("");
   const [message, setMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSend = async () => {
     if (!message.trim()) return showToast("Message is required!", "error");
@@ -91,7 +92,9 @@ export default function AnnounceTab({ allGames, showToast }) {
               style={{ width: "100%", maxWidth: 300 }}
             >
               <option value="">-- Pilih Game --</option>
-              {Object.entries(allGames).map(([id, g]) => (
+              {Object.entries(allGames)
+                .filter(([id, g]) => (g.name || id).toLowerCase().includes(searchQuery.toLowerCase()) || id.includes(searchQuery))
+                .map(([id, g]) => (
                 <option key={id} value={id}>{g.name || id} ({id})</option>
               ))}
             </select>
@@ -101,8 +104,20 @@ export default function AnnounceTab({ allGames, showToast }) {
         {targetType === "selected" && (
           <div style={{ marginBottom: 20 }}>
             <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 8 }}>Pilih game yang akan dikirim:</div>
+            <div style={{ marginBottom: 10 }}>
+              <input
+                type="text"
+                className="modal-input"
+                placeholder="🔍 Cari game (nama / ID)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ width: "100%", maxWidth: 300, padding: "8px 12px", fontSize: 12 }}
+              />
+            </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 8, maxHeight: 200, overflowY: "auto", background: "rgba(0,0,0,0.2)", padding: 12, borderRadius: 6, border: "1px solid var(--border)" }}>
-              {Object.entries(allGames).map(([id, g]) => (
+              {Object.entries(allGames)
+                .filter(([id, g]) => (g.name || id).toLowerCase().includes(searchQuery.toLowerCase()) || id.includes(searchQuery))
+                .map(([id, g]) => (
                 <label key={id} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, cursor: "pointer" }}>
                   <input
                     type="checkbox"
