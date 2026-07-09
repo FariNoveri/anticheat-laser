@@ -1,8 +1,10 @@
-export const pmDesc = {
+export const pmDesc = (type) => ({
   kick:    "Player akan di-kick dari server saat terdeteksi.",
   respawn: "Player di-kill dan respawn, tidak di-kick.",
-  disable: "Animasi langsung dihentikan. Player tidak di-kick maupun di-respawn.",
-};
+  disable: type === "anim" 
+    ? "Karakter player di-refresh (LoadCharacter) secara instan."
+    : "Semua pakaian, aksesoris, dan mesh pada avatar akan dihapus (Naked).",
+});
 
 // ASSET_TYPE_MAP removed — only body-part controls are supported now.
 

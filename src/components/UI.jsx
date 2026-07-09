@@ -63,7 +63,7 @@ export function PunishModeGrid({ type, value, onChange }) {
           </button>
         ))}
       </div>
-      <div className="punish-mode-desc">{pmDesc[value] || ""}</div>
+      <div className="punish-mode-desc">{pmDesc(type)[value] || ""}</div>
     </>
   );
 } 
