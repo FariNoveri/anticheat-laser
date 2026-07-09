@@ -67,6 +67,12 @@ export default function AnnounceTab({ allGames, showToast }) {
       </div>
 
       <div className="card" style={{ padding: "20px 24px" }}>
+        <div style={{ marginBottom: 20, padding: 15, backgroundColor: "rgba(255, 165, 0, 0.1)", borderLeft: "4px solid orange", borderRadius: 4 }}>
+          <p style={{ margin: 0, color: "orange", fontSize: "14px" }}>
+            <strong>⚠️ Catatan Penting:</strong> Fitur pengumuman hanya akan diterima oleh game yang telah memasang file <code>Announcement.lua</code> di dalam folder Modules. Jika pengguna tidak memasukkannya, pengumuman tidak akan muncul.
+          </p>
+        </div>
+
         <h3 style={{ marginBottom: 16, fontSize: 16 }}>Broadcast Message</h3>
         <div style={{ display: "flex", gap: 16, marginBottom: 20, flexWrap: "wrap" }}>
           <label style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontSize: 13 }}>
