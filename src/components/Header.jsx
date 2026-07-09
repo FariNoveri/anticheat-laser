@@ -4,10 +4,10 @@ import { auth } from "../firebase/config";
 
 const TABS = [
   { id: "dashboard", label: "📊 DASHBOARD" },
+  { id: "announce",  label: "📢 ANNOUNCE" },
   { id: "games",     label: "🎮 GAMES" },
   { id: "emotes",    label: "🎭 EMOTE / ANIM" },
   { id: "body",      label: "🦴 BODY" },
-  { id: "announce",  label: "📢 ANNOUNCE" },
 ];
 
 export default function Header({ statusText, statusCls, activeTab, onSwitchTab }) {
