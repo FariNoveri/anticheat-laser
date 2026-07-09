@@ -6,14 +6,14 @@ import { formatExpiry, isExpired } from "../utils/helpers";
 
 // ── Force Push Bar ────────────────────────────────────────
 export function ForcePushBar({ onPush }) {
-  const [pushing, setPushing]       = useState(false);
-  const [lastPush, setLastPush]     = useState("Belum pernah push sesi ini");
+  const [pushing, setPushing] = useState(false);
+  const [lastPush, setLastPush] = useState("Belum pernah push sesi ini");
 
   const handlePush = async () => {
     setPushing(true);
     await onPush();
     const t = new Date();
-    const hms = `${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}:${String(t.getSeconds()).padStart(2,"0")}`;
+    const hms = `${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}:${String(t.getSeconds()).padStart(2, "0")}`;
     setLastPush(`Last push: ${hms}`);
     setPushing(false);
   };
@@ -38,22 +38,22 @@ export function ForcePushBar({ onPush }) {
 
 // ── Global Controls Card ──────────────────────────────────
 export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
-  const [acOn,   setAcOn]   = useState(true);
-  const [abOn,   setAbOn]   = useState(true);
+  const [acOn, setAcOn] = useState(true);
+  const [abOn, setAbOn] = useState(true);
   const [pmAvatar, setPmAvatar] = useState("kick");
-  const [pmAnim,   setPmAnim]   = useState("kick");
+  const [pmAnim, setPmAnim] = useState("kick");
   const [kickMsgAvatar, setKickMsgAvatar] = useState("");
-  const [kickMsgAnim,   setKickMsgAnim]   = useState("");
-  const [webhookUrl,    setWebhookUrl]    = useState("");
+  const [kickMsgAnim, setKickMsgAnim] = useState("");
+  const [webhookUrl, setWebhookUrl] = useState("");
   const [webhookNotifAvatar, setWNA] = useState(true);
-  const [webhookNotifAnim,   setWNN] = useState(true);
+  const [webhookNotifAnim, setWNN] = useState(true);
   const [webhookReasonAvatar, setWRA] = useState("");
-  const [webhookReasonAnim,   setWRN] = useState("");
+  const [webhookReasonAnim, setWRN] = useState("");
   const [webhookTitleAvatar, setWTA] = useState("");
   const [webhookColorAvatar, setWCA] = useState("");
-  const [webhookTitleAnim,   setWTN] = useState("");
-  const [webhookColorAnim,   setWCN] = useState("");
-  const [webhookFooter,      setWF]  = useState("");
+  const [webhookTitleAnim, setWTN] = useState("");
+  const [webhookColorAnim, setWCN] = useState("");
+  const [webhookFooter, setWF] = useState("");
 
   useEffect(() => {
     return onValue(ref(db, "global"), (snap) => {
@@ -61,19 +61,19 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       setAcOn(d.anticheat !== false);
       setAbOn(d.animation_blocker !== false);
       setPmAvatar(d.punishment_mode_avatar || "kick");
-      setPmAnim(d.punishment_mode_anim     || "kick");
-      if (d.kick_message_avatar)   setKickMsgAvatar(d.kick_message_avatar);
-      if (d.kick_message_anim)     setKickMsgAnim(d.kick_message_anim);
-      if (d.webhook_url)           setWebhookUrl(d.webhook_url);
+      setPmAnim(d.punishment_mode_anim || "kick");
+      if (d.kick_message_avatar) setKickMsgAvatar(d.kick_message_avatar);
+      if (d.kick_message_anim) setKickMsgAnim(d.kick_message_anim);
+      if (d.webhook_url) setWebhookUrl(d.webhook_url);
       setWNA(d.webhook_notify_avatar !== false);
-      setWNN(d.webhook_notify_anim   !== false);
+      setWNN(d.webhook_notify_anim !== false);
       if (d.webhook_reason_avatar) setWRA(d.webhook_reason_avatar);
-      if (d.webhook_reason_anim)   setWRN(d.webhook_reason_anim);
-      if (d.webhook_title_avatar)  setWTA(d.webhook_title_avatar);
-      if (d.webhook_color_avatar)  setWCA(d.webhook_color_avatar);
-      if (d.webhook_title_anim)    setWTN(d.webhook_title_anim);
-      if (d.webhook_color_anim)    setWCN(d.webhook_color_anim);
-      if (d.webhook_footer)        setWF(d.webhook_footer);
+      if (d.webhook_reason_anim) setWRN(d.webhook_reason_anim);
+      if (d.webhook_title_avatar) setWTA(d.webhook_title_avatar);
+      if (d.webhook_color_avatar) setWCA(d.webhook_color_avatar);
+      if (d.webhook_title_anim) setWTN(d.webhook_title_anim);
+      if (d.webhook_color_anim) setWCN(d.webhook_color_anim);
+      if (d.webhook_footer) setWF(d.webhook_footer);
     });
   }, []);
 
@@ -227,7 +227,7 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
       (g.place_ids || []).some((p) => String(p).includes(q));
   });
 
-  const total   = Object.keys(allGames).length;
+  const total = Object.keys(allGames).length;
   const enabled = Object.values(allGames).filter((g) => g.anticheat?.enabled !== false).length;
 
   return (
@@ -253,7 +253,7 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
           padding: "10px 16px", outline: "none", marginBottom: 16,
         }}
         onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-        onBlur={(e)  => (e.target.style.borderColor = "var(--border)")}
+        onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
       />
 
       <div className="table-wrap">
@@ -268,42 +268,42 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
             {!games.length
               ? <tr><td colSpan={8}><div className="state-msg"><span className="big">◎</span>{search ? "No results" : "No games yet"}</div></td></tr>
               : games.map(([id, g]) => {
-                  const exp     = g.expiry || 0;
-                  const expired = isExpired(exp);
-                  return (
-                    <tr key={id} style={{ opacity: expired ? 0.5 : 1 }}>
-                      <td><div style={{ fontWeight: 700 }}>{g.name || id}</div></td>
-                      <td>
-                        {exp === 0
-                          ? <Badge cls="active" style={{ fontSize: 9 }}>∞ PERM</Badge>
-                          : expired
-                            ? <Badge cls="disabled" style={{ fontSize: 9 }}>EXPIRED</Badge>
-                            : <span className="badge" style={{ fontSize: 9, color: "var(--accent3)", borderColor: "var(--accent3)" }}>{formatExpiry(exp)}</span>}
-                      </td>
-                      <td>
-                        <Switch checked={g.anticheat?.enabled !== false}
-                          onChange={(v) => toggleGame(id, "anticheat", v)} />
-                      </td>
-                      <td>
-                        <Switch checked={g.animation_blocker?.enabled !== false}
-                          onChange={(v) => toggleGame(id, "animation_blocker", v)} />
-                      </td>
-                      <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
-                      <td><ModeBadge mode={g.punishment_mode_anim} /></td>
-                      <td>
-                        {(g.place_ids || []).map((p) => (
-                          <span key={p} className="placeid-tag">{p}</span>
-                        ))}
-                      </td>
-                      <td>
-                        <div style={{ display: "flex", gap: 6 }}>
-                          <button className="toggle-btn edit" onClick={() => onEdit(id)}>EDIT</button>
-                          <button className="toggle-btn del"  onClick={() => onDelete(id)}>DEL</button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                const exp = g.expiry || 0;
+                const expired = isExpired(exp);
+                return (
+                  <tr key={id} style={{ opacity: expired ? 0.5 : 1 }}>
+                    <td><div style={{ fontWeight: 700 }}>{g.name || id}</div></td>
+                    <td>
+                      {exp === 0
+                        ? <Badge cls="active" style={{ fontSize: 9 }}>∞ PERM</Badge>
+                        : expired
+                          ? <Badge cls="disabled" style={{ fontSize: 9 }}>EXPIRED</Badge>
+                          : <span className="badge" style={{ fontSize: 9, color: "var(--accent3)", borderColor: "var(--accent3)" }}>{formatExpiry(exp)}</span>}
+                    </td>
+                    <td>
+                      <Switch checked={g.anticheat?.enabled !== false}
+                        onChange={(v) => toggleGame(id, "anticheat", v)} />
+                    </td>
+                    <td>
+                      <Switch checked={g.animation_blocker?.enabled !== false}
+                        onChange={(v) => toggleGame(id, "animation_blocker", v)} />
+                    </td>
+                    <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
+                    <td><ModeBadge mode={g.punishment_mode_anim} /></td>
+                    <td>
+                      {(g.place_ids || []).map((p) => (
+                        <span key={p} className="placeid-tag">{p}</span>
+                      ))}
+                    </td>
+                    <td>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button className="toggle-btn edit" onClick={() => onEdit(id)}>EDIT</button>
+                        <button className="toggle-btn del" onClick={() => onDelete(id)}>DEL</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

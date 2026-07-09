@@ -4,27 +4,27 @@ import { fetchGameName, formatExpiry, isExpired, getExpiryFromForm, slugify } fr
 
 // ── Game Modal ────────────────────────────────────────────
 export function GameModal({ show, onClose, onSave, editingGame, editingGameId }) {
-  const [name,         setName]         = useState("");
-  const [tags,         setTags]         = useState([]);
-  const [anticheat,    setAnticheat]    = useState(true);
-  const [animblock,    setAnimblock]    = useState(true);
-  const [pmAvatar,     setPmAvatar]     = useState("kick");
-  const [pmAnim,       setPmAnim]       = useState("kick");
-  const [duration,     setDuration]     = useState("0");
+  const [name, setName] = useState("");
+  const [tags, setTags] = useState([]);
+  const [anticheat, setAnticheat] = useState(true);
+  const [animblock, setAnimblock] = useState(true);
+  const [pmAvatar, setPmAvatar] = useState("kick");
+  const [pmAnim, setPmAnim] = useState("kick");
+  const [duration, setDuration] = useState("0");
   const [customExpiry, setCustomExpiry] = useState("");
-  const [kmAvatar,     setKmAvatar]     = useState("");
-  const [kmAnim,       setKmAnim]       = useState("");
-  const [webhookUrl,   setWebhookUrl]   = useState("");
-  const [wNotifAvatar, setWNA]          = useState(true);
-  const [wNotifAnim,   setWNN]          = useState(true);
-  const [wReasonAvatar,setWRA]          = useState("");
-  const [wReasonAnim,  setWRN]          = useState("");
-  const [wTitleAvatar, setWTA]          = useState("");
-  const [wColorAvatar, setWCA]          = useState("");
-  const [wTitleAnim,   setWTN]          = useState("");
-  const [wColorAnim,   setWCN]          = useState("");
-  const [wFooter,      setWF]           = useState("");
-  const [expiryPreview,setExpiryPreview]= useState("");
+  const [kmAvatar, setKmAvatar] = useState("");
+  const [kmAnim, setKmAnim] = useState("");
+  const [webhookUrl, setWebhookUrl] = useState("");
+  const [wNotifAvatar, setWNA] = useState(true);
+  const [wNotifAnim, setWNN] = useState(true);
+  const [wReasonAvatar, setWRA] = useState("");
+  const [wReasonAnim, setWRN] = useState("");
+  const [wTitleAvatar, setWTA] = useState("");
+  const [wColorAvatar, setWCA] = useState("");
+  const [wTitleAnim, setWTN] = useState("");
+  const [wColorAnim, setWCN] = useState("");
+  const [wFooter, setWF] = useState("");
+  const [expiryPreview, setExpiryPreview] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -36,19 +36,19 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setAnticheat(g.anticheat?.enabled !== false);
       setAnimblock(g.animation_blocker?.enabled !== false);
       setPmAvatar(g.punishment_mode_avatar || "kick");
-      setPmAnim(g.punishment_mode_anim     || "kick");
-      setKmAvatar(g.kick_message_avatar    || "");
-      setKmAnim(g.kick_message_anim        || "");
-      setWebhookUrl(g.webhook_url          || "");
+      setPmAnim(g.punishment_mode_anim || "kick");
+      setKmAvatar(g.kick_message_avatar || "");
+      setKmAnim(g.kick_message_anim || "");
+      setWebhookUrl(g.webhook_url || "");
       setWNA(g.webhook_notify_avatar !== false);
-      setWNN(g.webhook_notify_anim   !== false);
-      setWRA(g.webhook_reason_avatar  || "");
-      setWRN(g.webhook_reason_anim    || "");
-      setWTA(g.webhook_title_avatar   || "");
-      setWCA(g.webhook_color_avatar   || "");
-      setWTN(g.webhook_title_anim     || "");
-      setWCN(g.webhook_color_anim     || "");
-      setWF(g.webhook_footer          || "");
+      setWNN(g.webhook_notify_anim !== false);
+      setWRA(g.webhook_reason_avatar || "");
+      setWRN(g.webhook_reason_anim || "");
+      setWTA(g.webhook_title_avatar || "");
+      setWCA(g.webhook_color_avatar || "");
+      setWTN(g.webhook_title_anim || "");
+      setWCN(g.webhook_color_anim || "");
+      setWF(g.webhook_footer || "");
       const exp = g.expiry || 0;
       setDuration(exp === 0 ? "0" : "custom");
       setCustomExpiry(exp > 0 ? new Date(exp * 1000).toISOString().slice(0, 16) : "");
@@ -83,26 +83,26 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
 
   const handleSave = () => {
     if (!name.trim() || !tags.length) return;
-    const gameId  = editingGameId || slugify(name);
-    const expiry  = getExpiryFromForm(duration, customExpiry);
+    const gameId = editingGameId || slugify(name);
+    const expiry = getExpiryFromForm(duration, customExpiry);
     const data = {
       name, place_ids: tags.map(Number), expiry,
-      anticheat:         { enabled: anticheat },
+      anticheat: { enabled: anticheat },
       animation_blocker: { enabled: animblock },
       punishment_mode_avatar: pmAvatar,
-      punishment_mode_anim:   pmAnim,
-      webhook_notify_avatar:  wNotifAvatar,
-      webhook_notify_anim:    wNotifAnim,
-      ...(kmAvatar    && { kick_message_avatar:   kmAvatar }),
-      ...(kmAnim      && { kick_message_anim:      kmAnim }),
-      ...(webhookUrl  && { webhook_url:            webhookUrl }),
+      punishment_mode_anim: pmAnim,
+      webhook_notify_avatar: wNotifAvatar,
+      webhook_notify_anim: wNotifAnim,
+      ...(kmAvatar && { kick_message_avatar: kmAvatar }),
+      ...(kmAnim && { kick_message_anim: kmAnim }),
+      ...(webhookUrl && { webhook_url: webhookUrl }),
       ...(wReasonAvatar && { webhook_reason_avatar: wReasonAvatar }),
-      ...(wReasonAnim   && { webhook_reason_anim:   wReasonAnim }),
-      ...(wTitleAvatar  && { webhook_title_avatar:  wTitleAvatar }),
-      ...(wColorAvatar  && { webhook_color_avatar:  wColorAvatar }),
-      ...(wTitleAnim    && { webhook_title_anim:    wTitleAnim }),
-      ...(wColorAnim    && { webhook_color_anim:    wColorAnim }),
-      ...(wFooter       && { webhook_footer:        wFooter }),
+      ...(wReasonAnim && { webhook_reason_anim: wReasonAnim }),
+      ...(wTitleAvatar && { webhook_title_avatar: wTitleAvatar }),
+      ...(wColorAvatar && { webhook_color_avatar: wColorAvatar }),
+      ...(wTitleAnim && { webhook_title_anim: wTitleAnim }),
+      ...(wColorAnim && { webhook_color_anim: wColorAnim }),
+      ...(wFooter && { webhook_footer: wFooter }),
     };
     onSave(gameId, data);
   };
@@ -247,7 +247,7 @@ export default function GamesTab({ allGames, toggleGame, loadAll, onAdd, onEdit,
           padding: "10px 16px", outline: "none", marginBottom: 16,
         }}
         onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-        onBlur={(e)  => (e.target.style.borderColor = "var(--border)")}
+        onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
       />
 
       <div className="table-wrap">
@@ -263,48 +263,48 @@ export default function GamesTab({ allGames, toggleGame, loadAll, onAdd, onEdit,
             {!games.length
               ? <tr><td colSpan={8}><div className="state-msg"><span className="big">🎮</span>No games yet</div></td></tr>
               : games.map(([id, g]) => {
-                  const exp     = g.expiry || 0;
-                  const expired = isExpired(exp);
-                  const acOn    = g.anticheat?.enabled !== false;
-                  const abOn    = g.animation_blocker?.enabled !== false;
-                  return (
-                    <tr key={id} style={{ opacity: expired ? 0.5 : 1 }}>
-                      <td style={{ fontWeight: 700 }}>{g.name || id}</td>
-                      <td>
-                        {exp === 0
-                          ? <Badge cls="active" style={{ fontSize: 9 }}>∞ PERM</Badge>
-                          : expired
-                            ? <Badge cls="disabled" style={{ fontSize: 9 }}>EXPIRED</Badge>
-                            : <span className="badge" style={{ fontSize: 9, color: "var(--accent3)", borderColor: "var(--accent3)" }}>{formatExpiry(exp)}</span>}
-                      </td>
-                      <td>{(g.place_ids || []).map((p) => <span key={p} className="placeid-tag">{p}</span>)}</td>
-                      <td>
-                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                          <Switch checked={acOn} onChange={(v) => toggleGame(id, "anticheat", v)} />
-                          <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: acOn ? "var(--accent)" : "var(--accent2)" }}>
-                            {acOn ? "ON" : "OFF"}
-                          </span>
-                        </div>
-                      </td>
-                      <td>
-                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                          <Switch checked={abOn} onChange={(v) => toggleGame(id, "animation_blocker", v)} />
-                          <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: abOn ? "var(--accent4)" : "var(--accent2)" }}>
-                            {abOn ? "ON" : "OFF"}
-                          </span>
-                        </div>
-                      </td>
-                      <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
-                      <td><ModeBadge mode={g.punishment_mode_anim} /></td>
-                      <td>
-                        <div style={{ display: "flex", gap: 6 }}>
-                          <button className="toggle-btn edit" onClick={() => onEdit(id)}>EDIT</button>
-                          <button className="toggle-btn del"  onClick={() => onDelete(id)}>DEL</button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                const exp = g.expiry || 0;
+                const expired = isExpired(exp);
+                const acOn = g.anticheat?.enabled !== false;
+                const abOn = g.animation_blocker?.enabled !== false;
+                return (
+                  <tr key={id} style={{ opacity: expired ? 0.5 : 1 }}>
+                    <td style={{ fontWeight: 700 }}>{g.name || id}</td>
+                    <td>
+                      {exp === 0
+                        ? <Badge cls="active" style={{ fontSize: 9 }}>∞ PERM</Badge>
+                        : expired
+                          ? <Badge cls="disabled" style={{ fontSize: 9 }}>EXPIRED</Badge>
+                          : <span className="badge" style={{ fontSize: 9, color: "var(--accent3)", borderColor: "var(--accent3)" }}>{formatExpiry(exp)}</span>}
+                    </td>
+                    <td>{(g.place_ids || []).map((p) => <span key={p} className="placeid-tag">{p}</span>)}</td>
+                    <td>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        <Switch checked={acOn} onChange={(v) => toggleGame(id, "anticheat", v)} />
+                        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: acOn ? "var(--accent)" : "var(--accent2)" }}>
+                          {acOn ? "ON" : "OFF"}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        <Switch checked={abOn} onChange={(v) => toggleGame(id, "animation_blocker", v)} />
+                        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: abOn ? "var(--accent4)" : "var(--accent2)" }}>
+                          {abOn ? "ON" : "OFF"}
+                        </span>
+                      </div>
+                    </td>
+                    <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
+                    <td><ModeBadge mode={g.punishment_mode_anim} /></td>
+                    <td>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button className="toggle-btn edit" onClick={() => onEdit(id)}>EDIT</button>
+                        <button className="toggle-btn del" onClick={() => onDelete(id)}>DEL</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
