@@ -288,8 +288,8 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
                       <Switch checked={g.animation_blocker?.enabled !== false}
                         onChange={(v) => toggleGame(id, "animation_blocker", v)} />
                     </td>
-                    <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
-                    <td><ModeBadge mode={g.punishment_mode_anim} /></td>
+                    <td><ModeBadge mode={g.punishment_mode_avatar} type="avatar" /></td>
+                    <td><ModeBadge mode={g.punishment_mode_anim} type="anim" /></td>
                     <td>
                       {(g.place_ids || []).map((p) => (
                         <span key={p} className="placeid-tag">{p}</span>

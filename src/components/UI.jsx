@@ -18,9 +18,10 @@ export function Badge({ cls, children, style = {} }) {
   return <span className={`badge ${cls}`} style={style}>{children}</span>;
 }
 
-export function ModeBadge({ mode }) {
+export function ModeBadge({ mode, type }) {
   const m = (mode || "kick").toLowerCase();
-  const labels = { kick: "🚫 KICK", respawn: "♻ RESPAWN", disable: "🔇 DISABLE" };
+  const disableLabel = type === "anim" ? "🔄 REFRESH" : "👕 NAKED";
+  const labels = { kick: "🚫 KICK", respawn: "♻ RESPAWN", disable: disableLabel };
   return <Badge cls={`mode-${m}`}>{labels[m] || m.toUpperCase()}</Badge>;
 }
 
@@ -36,14 +37,14 @@ export function ExpiryBadge({ expiry }) {
 
 // ── Punishment Mode Grid ─────────────────────────────────
 export function PunishModeGrid({ type, value, onChange }) {
-  const modes = type === "anim"
-    ? ["kick", "respawn", "disable"]
-    : ["kick", "respawn"];
+  const modes = ["kick", "respawn", "disable"];
 
   const labels = {
     kick:    { icon: "🚫 KICK",     sub: "keluarkan" },
     respawn: { icon: "♻ RESPAWN",  sub: "kill+respawn" },
-    disable: { icon: "🔇 DISABLE", sub: "stop anim aja" },
+    disable: type === "anim" 
+      ? { icon: "🔄 REFRESH", sub: "LoadCharacter" } 
+      : { icon: "👕 NAKED", sub: "hapus baju" },
   };
 
   return (

@@ -294,8 +294,8 @@ export default function GamesTab({ allGames, toggleGame, loadAll, onAdd, onEdit,
                         </span>
                       </div>
                     </td>
-                    <td><ModeBadge mode={g.punishment_mode_avatar} /></td>
-                    <td><ModeBadge mode={g.punishment_mode_anim} /></td>
+                    <td><ModeBadge mode={g.punishment_mode_avatar} type="avatar" /></td>
+                    <td><ModeBadge mode={g.punishment_mode_anim} type="anim" /></td>
                     <td>
                       <div style={{ display: "flex", gap: 6 }}>
                         <button className="toggle-btn edit" onClick={() => onEdit(id)}>EDIT</button>
