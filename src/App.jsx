@@ -11,6 +11,7 @@ import { ForcePushBar, GlobalControls } from "./components/OverviewTab";
 import GamesTab, { GameModal } from "./components/GamesTab";
 import AnimationsTab from "./components/AnimationsTab";
 import AvatarsTab from "./components/AvatarsTab";
+import AnnounceTab from "./components/AnnounceTab";
 import { ConfirmDeleteModal } from "./components/UI";
 
 export default function App() {
@@ -129,6 +130,13 @@ export default function App() {
               saveAvatar={store.saveAvatar}
               deleteAvatar={store.deleteAvatar}
               toggleAvatarExclude={store.toggleAvatarExclude}
+              showToast={showToast}
+            />
+          )}
+
+          {activeTab === "announce" && (
+            <AnnounceTab
+              allGames={store.allGames}
               showToast={showToast}
             />
           )}
