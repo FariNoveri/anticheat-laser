@@ -8,8 +8,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
   const [tags, setTags] = useState([]);
   const [anticheat, setAnticheat] = useState(true);
   const [animblock, setAnimblock] = useState(true);
-  const [pmAvatar, setPmAvatar] = useState("kick");
-  const [pmAnim, setPmAnim] = useState("kick");
+  const [pmAvatar, setPmAvatar] = useState("global");
+  const [pmAnim, setPmAnim] = useState("global");
   const [duration, setDuration] = useState("0");
   const [customExpiry, setCustomExpiry] = useState("");
   const [kmAvatar, setKmAvatar] = useState("");
@@ -35,8 +35,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setTags((g.place_ids || []).map(String));
       setAnticheat(g.anticheat?.enabled !== false);
       setAnimblock(g.animation_blocker?.enabled !== false);
-      setPmAvatar(g.punishment_mode_avatar || "kick");
-      setPmAnim(g.punishment_mode_anim || "kick");
+      setPmAvatar(g.punishment_mode_avatar || "global");
+      setPmAnim(g.punishment_mode_anim || "global");
       setKmAvatar(g.kick_message_avatar || "");
       setKmAnim(g.kick_message_anim || "");
       setWebhookUrl(g.webhook_url || "");
@@ -54,7 +54,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setCustomExpiry(exp > 0 ? new Date(exp * 1000).toISOString().slice(0, 16) : "");
     } else {
       setName(""); setTags([]); setAnticheat(true); setAnimblock(true);
-      setPmAvatar("kick"); setPmAnim("kick");
+      setPmAvatar("global");
+      setPmAnim("global");
       setDuration("0"); setCustomExpiry("");
       setKmAvatar(""); setKmAnim(""); setWebhookUrl("");
       setWNA(true); setWNN(true); setWRA(""); setWRN("");
@@ -149,10 +150,10 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
         </div>
 
         <label className="modal-label">⚔ Punishment — Avatar Detection</label>
-        <PunishModeGrid type="avatar" value={pmAvatar} onChange={setPmAvatar} />
+        <PunishModeGrid type="avatar" value={pmAvatar} onChange={setPmAvatar} allowGlobal={true} />
 
         <label className="modal-label" style={{ marginTop: 8 }}>⚔ Punishment — Animation Detection</label>
-        <PunishModeGrid type="anim" value={pmAnim} onChange={setPmAnim} />
+        <PunishModeGrid type="anim" value={pmAnim} onChange={setPmAnim} allowGlobal={true} />
 
         {/* Webhook Override */}
         <div className="webhook-block">
