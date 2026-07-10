@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>my-react-app</title>
+    <title>Anti Cheat Laser by Fari Noveri</title>
+    <script>
+      let titleText = "Anti Cheat Laser by Fari Noveri   |   ";
+      setInterval(() => {
+        titleText = titleText.substring(1) + titleText.charAt(0);
+        document.title = titleText;
+      }, 400);
+    </script>
   </head>
   <body>
     <div id="root"></div>
