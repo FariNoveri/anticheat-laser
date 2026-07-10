@@ -143,26 +143,22 @@ export default function HistoryTab() {
       </div>
 
       <Modal show={modalOpen} onClose={() => setModalOpen(false)} title={editingItem ? "✏️ Edit Transaksi" : "➕ Tambah Transaksi"}>
-        <form onSubmit={handleSave} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div className="form-group">
-            <label>Nama Pembeli / Player</label>
-            <input type="text" value={formData.buyerName} onChange={e => setFormData({ ...formData, buyerName: e.target.value })} required />
-          </div>
-          <div className="form-group">
-            <label>Nama Game</label>
-            <input type="text" value={formData.gameName} onChange={e => setFormData({ ...formData, gameName: e.target.value })} required />
-          </div>
-          <div className="form-group">
-            <label>Game ID (Place ID)</label>
-            <input type="number" value={formData.gameId} onChange={e => setFormData({ ...formData, gameId: e.target.value })} required />
-          </div>
-          <div className="form-group">
-            <label>Durasi (Hari)</label>
-            <input type="number" value={formData.durationDays} onChange={e => setFormData({ ...formData, durationDays: e.target.value })} required />
-          </div>
-          <div className="modal-actions" style={{ marginTop: "10px" }}>
-            <button type="button" className="btn outline" onClick={() => setModalOpen(false)}>Batal</button>
-            <button type="submit" className="btn primary">Simpan</button>
+        <form onSubmit={handleSave} style={{ display: "flex", flexDirection: "column" }}>
+          <label className="modal-label">Nama Pembeli / Player</label>
+          <input className="modal-input" type="text" value={formData.buyerName} onChange={e => setFormData({ ...formData, buyerName: e.target.value })} placeholder="CahayaLuna" required />
+          
+          <label className="modal-label">Nama Game</label>
+          <input className="modal-input" type="text" value={formData.gameName} onChange={e => setFormData({ ...formData, gameName: e.target.value })} placeholder="RP Nusantara" required />
+          
+          <label className="modal-label">Game ID (Place ID)</label>
+          <input className="modal-input" type="number" value={formData.gameId} onChange={e => setFormData({ ...formData, gameId: e.target.value })} placeholder="123456789" required />
+          
+          <label className="modal-label">Durasi (Hari)</label>
+          <input className="modal-input" type="number" value={formData.durationDays} onChange={e => setFormData({ ...formData, durationDays: e.target.value })} required />
+          
+          <div className="modal-actions" style={{ marginTop: 24 }}>
+            <button type="button" className="btn" onClick={() => setModalOpen(false)}>CANCEL</button>
+            <button type="submit" className="btn primary">SAVE</button>
           </div>
         </form>
       </Modal>

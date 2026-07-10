@@ -15,6 +15,10 @@
     "banned_avatars": {
       ".read": "auth != null",
       ".write": "auth != null"
+    },
+    "purchase_history": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }

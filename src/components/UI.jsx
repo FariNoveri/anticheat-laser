@@ -82,7 +82,7 @@ export function ModalOverlay({ show, onClose, children, variant = "" }) {
 export function Modal({ show, onClose, title, children }) {
   return (
     <ModalOverlay show={show} onClose={onClose}>
-      <div className="modal">
+      <div className="modal" style={{ width: "min(500px,100%)", maxHeight: "90vh", overflowY: "auto" }}>
         <div className="modal-title">{title}</div>
         <div style={{ marginTop: 16 }}>
           {children}
