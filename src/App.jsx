@@ -12,6 +12,7 @@ import GamesTab, { GameModal } from "./components/GamesTab";
 import AnimationsTab from "./components/AnimationsTab";
 import AvatarsTab from "./components/AvatarsTab";
 import AnnounceTab from "./components/AnnounceTab";
+import HistoryTab from "./components/HistoryTab";
 import { ConfirmDeleteModal } from "./components/UI";
 
 export default function App() {
@@ -140,6 +141,8 @@ export default function App() {
               showToast={showToast}
             />
           )}
+
+          {activeTab === "history" && <HistoryTab />}
         </div>
       </main>
 

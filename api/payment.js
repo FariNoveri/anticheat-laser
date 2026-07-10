@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { gameId, gameName, durationDays, token } = req.body || {};
+  const { gameId, gameName, durationDays, token, buyerName } = req.body || {};
   
   // Security token
   if (token !== "LASER_SECURE_PAYMENT_9921") {
@@ -58,6 +58,19 @@ export default async function handler(req, res) {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData)
+    });
+    // 5. Catat riwayat pembelian
+    const historyUrl = `${urlBase}/purchase_history.json?auth=${encodeURIComponent(secret)}`;
+    await fetch(historyUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        buyerName: buyerName || "Unknown",
+        gameId,
+        gameName: updatedData.name,
+        durationDays,
+        timestamp: now
+      })
     });
 
     const result = await putRes.json();

@@ -8,6 +8,7 @@ const TABS = [
   { id: "games",     label: "🎮 GAMES" },
   { id: "emotes",    label: "🎭 EMOTE / ANIM" },
   { id: "body",      label: "🦴 BODY" },
+  { id: "history",   label: "🧾 HISTORY" },
 ];
 
 export default function Header({ statusText, statusCls, activeTab, onSwitchTab }) {
