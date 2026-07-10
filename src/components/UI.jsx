@@ -78,6 +78,20 @@ export function ModalOverlay({ show, onClose, children, variant = "" }) {
   );
 }
 
+// ── Generic Modal ────────────────────────────────────────
+export function Modal({ show, onClose, title, children }) {
+  return (
+    <ModalOverlay show={show} onClose={onClose}>
+      <div className="modal">
+        <div className="modal-title">{title}</div>
+        <div style={{ marginTop: 16 }}>
+          {children}
+        </div>
+      </div>
+    </ModalOverlay>
+  );
+}
+
 // ── Confirm Delete Modal ─────────────────────────────────
 export function ConfirmDeleteModal({ show, onClose, onConfirm, title, message }) {
   return (
