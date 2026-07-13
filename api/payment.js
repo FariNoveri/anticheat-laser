@@ -2,14 +2,12 @@ export default async function handler(req, res) {
   const secret = process.env.FIREBASE_SECRET;
   const urlBase = "https://anticheat-laser-a31d2-default-rtdb.asia-southeast1.firebasedatabase.app";
 
-  // Hanya izinkan request dari Roblox
+  // Hanya izinkan request dari Roblox (POST method)
   const ua = req.headers["user-agent"] || "";
-  if (!ua.toLowerCase().includes("roblox")) {
-    return res.status(403).json({ error: "Access Denied" });
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (!ua.toLowerCase().includes("roblox") || req.method !== "POST") {
+    // Troll dummy bypassers by redirecting them to youtube
+    res.writeHead(302, { Location: 'https://www.youtube.com/watch?v=SCaAetNzXIc' });
+    return res.end();
   }
 
   const { gameId, gameName, durationDays, token, buyerName } = req.body || {};
