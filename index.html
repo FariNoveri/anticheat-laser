@@ -12,9 +12,14 @@
       setInterval(() => {
         if (window.location.pathname.includes('/admin')) {
           // Efek teks diacak (Glitch) khusus halaman /admin
+          let adminText = "ADMIN";
           let glitched = "";
-          for (let i = 0; i < 12; i++) {
-            glitched += glitchChars.charAt(Math.floor(Math.random() * glitchChars.length));
+          for (let i = 0; i < adminText.length; i++) {
+            if (Math.random() > 0.6) {
+              glitched += glitchChars.charAt(Math.floor(Math.random() * glitchChars.length));
+            } else {
+              glitched += adminText[i];
+            }
           }
           document.title = "💀 " + glitched + " 💀";
         } else {
