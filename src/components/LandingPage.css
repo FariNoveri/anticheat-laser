@@ -315,3 +315,56 @@
   transform: scale(1.1) translateY(-5px);
   box-shadow: 0 8px 25px rgba(255, 102, 178, 0.7);
 }
+
+/* Secret Blurred Text */
+.blurred-secret {
+  filter: blur(6px);
+  user-select: none;
+  opacity: 0.8;
+  transition: filter 0.3s ease;
+}
+
+.blurred-secret:hover {
+  filter: blur(5px);
+}
+
+/* Snow Effects */
+.cutecore-page {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.snow-layer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background-repeat: repeat;
+}
+
+.snow-layer.layer-1 {
+  background-image: radial-gradient(3px 3px at 20px 30px, #fff, rgba(0,0,0,0)), radial-gradient(3px 3px at 80px 100px, #fff, rgba(0,0,0,0)), radial-gradient(4px 4px at 150px 200px, #fff, rgba(0,0,0,0)), radial-gradient(3px 3px at 200px 70px, #fff, rgba(0,0,0,0));
+  background-size: 300px 300px;
+  animation: snowFall 6s linear infinite;
+  opacity: 0.7;
+}
+
+.snow-layer.layer-2 {
+  background-image: radial-gradient(4px 4px at 50px 160px, #fff, rgba(0,0,0,0)), radial-gradient(4px 4px at 120px 40px, #fff, rgba(0,0,0,0)), radial-gradient(5px 5px at 190px 180px, #fff, rgba(0,0,0,0));
+  background-size: 250px 250px;
+  animation: snowFall 4s linear infinite;
+  opacity: 0.8;
+}
+
+.snow-layer.layer-3 {
+  background-image: radial-gradient(5px 5px at 10px 10px, #fff, rgba(0,0,0,0)), radial-gradient(6px 6px at 90px 90px, #fff, rgba(0,0,0,0)), radial-gradient(5px 5px at 160px 120px, #fff, rgba(0,0,0,0));
+  background-size: 200px 200px;
+  animation: snowFall 3s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes snowFall {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 100px 300px; }
+}

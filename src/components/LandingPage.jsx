@@ -25,6 +25,11 @@ export default function LandingPage() {
 
   return (
     <div className="cutecore-page">
+      {/* Snow Effects */}
+      <div className="snow-layer layer-1"></div>
+      <div className="snow-layer layer-2"></div>
+      <div className="snow-layer layer-3"></div>
+
       {/* Navigation */}
       <nav className="cutecore-nav">
         <div className="cutecore-logo" style={{ display: "flex", alignItems: "center" }}>
@@ -52,12 +57,12 @@ export default function LandingPage() {
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
           <h3>Avatar Scanner</h3>
-          <p>Instantly detects and kicks players wearing banned clothing, faces, or accessories before they even spawn.</p>
+          <p className="blurred-secret">Instantly detects and kicks players wearing banned clothing, faces, or accessories before they even spawn.</p>
         </div>
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
           <h3>Animation Blocker</h3>
-          <p>Prevents exploiters from using glitched or inappropriate animations. Keeps your game family-friendly.</p>
+          <p className="blurred-secret">Prevents exploiters from using glitched or inappropriate animations. Keeps your game family-friendly.</p>
         </div>
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
@@ -79,7 +84,7 @@ export default function LandingPage() {
           
           <div className="pricing-card">
             <h3>Trial Plan</h3>
-            <div className="price" style={{fontSize: "42px"}}>300<br/><span style={{fontSize: "20px", color: "#8c5a77"}}>Robux</span></div>
+            <div className="price" style={{fontSize: "42px"}}>200<br/><span style={{fontSize: "20px", color: "#8c5a77"}}>Robux</span></div>
             <p style={{color: "#8c5a77", marginBottom: 20}}>For 3 Days</p>
             <ul className="pricing-features">
               <li>3 Days Access</li>
