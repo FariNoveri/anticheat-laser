@@ -1,0 +1,317 @@
+.cutecore-page {
+  font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffe6f2; /* Soft pastel pink */
+  color: #5c3a4f; /* Deep warm purple/brown */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: 
+    radial-gradient(#ffb3d9 1px, transparent 1px),
+    radial-gradient(#ffb3d9 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+.cutecore-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid #ffccf2;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.cutecore-logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff66b2;
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffccf2;
+  letter-spacing: 1px;
+}
+
+.cutecore-nav-links a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #ff66b2;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.cutecore-nav-links a:hover {
+  background: #ff66b2;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 102, 178, 0.4);
+}
+
+.cutecore-hero {
+  text-align: center;
+  padding: 120px 20px;
+  position: relative;
+  background-image: linear-gradient(rgba(255, 230, 242, 0.8), rgba(255, 230, 242, 0.95)), url('https://media1.tenor.com/m/n3jaZ9SBnWoAAAAC/pink-hair-anime-girl.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 2px solid #ffccf2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.cutecore-hero h1 {
+  font-size: 56px;
+  color: #ff3399;
+  text-shadow: 3px 3px 0px #fff, 6px 6px 0px #ffccf2;
+  margin-bottom: 20px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.cutecore-hero p {
+  font-size: 20px;
+  color: #8c5a77;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.cutecore-btn {
+  background: linear-gradient(135deg, #ff66b2, #ff3399);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 102, 178, 0.5);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cutecore-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.cutecore-features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 20px;
+  flex-wrap: wrap;
+}
+
+.cutecore-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 3px solid #ffccf2;
+  border-radius: 24px;
+  padding: 40px 30px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 1s ease-out backwards;
+}
+
+.cutecore-card:nth-child(1) { animation-delay: 0.2s; }
+.cutecore-card:nth-child(2) { animation-delay: 0.4s; }
+.cutecore-card:nth-child(3) { animation-delay: 0.6s; }
+
+.cutecore-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  border-color: #ff66b2;
+  box-shadow: 0 15px 40px rgba(255, 102, 178, 0.4);
+}
+
+.cutecore-card-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.cutecore-card h3 {
+  color: #ff3399;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.cutecore-pricing {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.cutecore-pricing h2 {
+  font-size: 42px;
+  color: #ff3399;
+  margin-bottom: 50px;
+}
+
+.pricing-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.pricing-card {
+  background: white;
+  border: 4px solid #ffccf2;
+  border-radius: 30px;
+  padding: 40px;
+  width: 280px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: fadeInUp 1s ease-out backwards;
+}
+
+.pricing-card:nth-child(1) { animation-delay: 0.3s; }
+.pricing-card:nth-child(2) { animation-delay: 0.5s; }
+.pricing-card:nth-child(3) { animation-delay: 0.7s; }
+
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #ff3399;
+  box-shadow: 0 20px 45px rgba(255, 102, 178, 0.5);
+}
+
+.pricing-card.popular {
+  border-color: #ff3399;
+  transform: scale(1.05);
+  animation: popularFloat 5s ease-in-out infinite;
+}
+
+.pricing-card.popular:hover {
+  transform: translateY(-15px) scale(1.08);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff3399;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.price {
+  font-size: 48px;
+  font-weight: 900;
+  color: #ff3399;
+  margin: 20px 0;
+}
+
+.price span {
+  font-size: 18px;
+  color: #8c5a77;
+  font-weight: normal;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.pricing-features li {
+  margin-bottom: 12px;
+  color: #5c3a4f;
+  font-weight: 600;
+}
+
+.pricing-features li::before {
+  content: '✨ ';
+}
+
+.cutecore-footer {
+  text-align: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #ff3399;
+  font-size: 16px;
+  border-top: 2px solid #ffccf2;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes popularFloat {
+  0% { transform: scale(1.05) translateY(0px); }
+  50% { transform: scale(1.05) translateY(-8px); }
+  100% { transform: scale(1.05) translateY(0px); }
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #ff66b2, #ff3399);
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 102, 178, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 102, 178, 0.7);
+}

@@ -17,6 +17,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
   const [webhookUrl, setWebhookUrl] = useState("");
   const [wNotifAvatar, setWNA] = useState(true);
   const [wNotifAnim, setWNN] = useState(true);
+  const [wShowIdAvatar, setWSIA] = useState(true);
+  const [wShowIdAnim, setWSIAN] = useState(true);
   const [wReasonAvatar, setWRA] = useState("");
   const [wReasonAnim, setWRN] = useState("");
   const [wTitleAvatar, setWTA] = useState("");
@@ -42,6 +44,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setWebhookUrl(g.webhook_url || "");
       setWNA(g.webhook_notify_avatar !== false);
       setWNN(g.webhook_notify_anim !== false);
+      setWSIA(g.webhook_show_id_avatar !== false);
+      setWSIAN(g.webhook_show_id_anim !== false);
       setWRA(g.webhook_reason_avatar || "");
       setWRN(g.webhook_reason_anim || "");
       setWTA(g.webhook_title_avatar || "");
@@ -59,6 +63,7 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setDuration("0"); setCustomExpiry("");
       setKmAvatar(""); setKmAnim(""); setWebhookUrl("");
       setWNA(true); setWNN(true); setWRA(""); setWRN("");
+      setWSIA(true); setWSIAN(true);
       setWTA(""); setWCA(""); setWTN(""); setWCN(""); setWF("");
     }
   }, [show, editingGame]);
@@ -83,27 +88,38 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
   };
 
   const handleSave = () => {
-    if (!name.trim() || !tags.length) return;
+    let finalTags = [...tags];
+    if (inputRef.current && inputRef.current.value.trim() !== "") {
+      const val = inputRef.current.value.trim();
+      if (!isNaN(val)) {
+        finalTags.push(val);
+        inputRef.current.value = "";
+      }
+    }
+
+    if (!name.trim() || !finalTags.length) return;
     const gameId = editingGameId || slugify(name);
     const expiry = getExpiryFromForm(duration, customExpiry);
     const data = {
-      name, place_ids: tags.map(Number), expiry,
+      name, place_ids: finalTags.map(Number), expiry,
       anticheat: { enabled: anticheat },
       animation_blocker: { enabled: animblock },
       punishment_mode_avatar: pmAvatar,
       punishment_mode_anim: pmAnim,
       webhook_notify_avatar: wNotifAvatar,
       webhook_notify_anim: wNotifAnim,
-      ...(kmAvatar && { kick_message_avatar: kmAvatar }),
-      ...(kmAnim && { kick_message_anim: kmAnim }),
+      webhook_show_id_avatar: wShowIdAvatar,
+      webhook_show_id_anim: wShowIdAnim,
+      kick_message_avatar: kmAvatar || "[AC] Avatar item dilarang terdeteksi!",
+      kick_message_anim: kmAnim || "[AC] Animasi dilarang terdeteksi!",
+      webhook_reason_avatar: wReasonAvatar || "Penggunaan avatar item yang dilarang",
+      webhook_reason_anim: wReasonAnim || "Penggunaan animasi yang dilarang",
+      webhook_title_avatar: wTitleAvatar || "🚨 Player — Banned Avatar Item",
+      webhook_color_avatar: wColorAvatar || "#e74c3c",
+      webhook_title_anim: wTitleAnim || "🚨 Player — Banned Animation",
+      webhook_color_anim: wColorAnim || "#ff8e10",
+      webhook_footer: wFooter || "LASER Anti-Cheat System",
       ...(webhookUrl && { webhook_url: webhookUrl }),
-      ...(wReasonAvatar && { webhook_reason_avatar: wReasonAvatar }),
-      ...(wReasonAnim && { webhook_reason_anim: wReasonAnim }),
-      ...(wTitleAvatar && { webhook_title_avatar: wTitleAvatar }),
-      ...(wColorAvatar && { webhook_color_avatar: wColorAvatar }),
-      ...(wTitleAnim && { webhook_title_anim: wTitleAnim }),
-      ...(wColorAnim && { webhook_color_anim: wColorAnim }),
-      ...(wFooter && { webhook_footer: wFooter }),
     };
     onSave(gameId, data);
   };
@@ -174,6 +190,22 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Switch checked={wNotifAnim} onChange={setWNN} />
                 <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>kirim notif anim</span>
+              </div>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
+            <div>
+              <label className="modal-label">Show ID Avatar</label>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <Switch checked={wShowIdAvatar} onChange={setWSIA} />
+                <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>tampilkan ID</span>
+              </div>
+            </div>
+            <div>
+              <label className="modal-label">Show ID Anim</label>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <Switch checked={wShowIdAnim} onChange={setWSIAN} />
+                <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>tampilkan ID</span>
               </div>
             </div>
           </div>

@@ -13,9 +13,10 @@ import AnimationsTab from "./components/AnimationsTab";
 import AvatarsTab from "./components/AvatarsTab";
 import AnnounceTab from "./components/AnnounceTab";
 import HistoryTab from "./components/HistoryTab";
-import { ConfirmDeleteModal } from "./components/UI";
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
 
-export default function App() {
+function AdminApp() {
   const [user, setUser] = useState(undefined);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [status, setStatus] = useState({ text: "CONNECTING...", cls: "yellow" });
@@ -164,5 +165,14 @@ export default function App() {
 
       <Toast toast={toast} />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/admin/*" element={<AdminApp />} />
+    </Routes>
   );
 }

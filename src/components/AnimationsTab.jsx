@@ -137,8 +137,25 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
     showToast(`🗑️ Anim ${deleteTarget.id} removed`);
   };
 
-  const bulkAction = async (action) => {
-    if (!selected.length || !confirm(`${action.toUpperCase()} ${selected.length} animation(s)?`)) return;
+  const bulkAction = async (action, targetScope) => {
+    if (!selected.length) return;
+    
+    if (action === "move") {
+      if (!confirm(`Move ${selected.length} animation(s) to ${targetScope === "global" ? "Global" : allGames[targetScope]?.name || targetScope}?`)) return;
+      let moved = 0;
+      for (const id of selected) {
+        const data = isGlobal ? allAnims.global?.[id] : allAnims.per_game?.[scope]?.[id];
+        if (!data) continue;
+        await saveAnim(targetScope, id, data);
+        await deleteAnim(scope, id);
+        moved++;
+      }
+      clearSel();
+      showToast(`✅ Moved ${moved} animation(s) to ${targetScope === "global" ? "Global" : allGames[targetScope]?.name || targetScope}!`);
+      return;
+    }
+
+    if (!confirm(`${action.toUpperCase()} ${selected.length} animation(s)?`)) return;
     for (const id of selected) {
       if (action === "delete")  await deleteAnim(scope, id);
       else if (action === "disable" && !isGlobal) await toggleAnimExclude(scope, id, true);
@@ -167,6 +184,20 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
             {!isGlobal && <button className="btn sm" style={{ color: "var(--accent2)" }} onClick={() => bulkAction("disable")}>🚫 Disable</button>}
             {!isGlobal && <button className="btn sm" style={{ color: "var(--accent)" }}  onClick={() => bulkAction("enable")}>✅ Enable</button>}
             <button className="btn sm" style={{ color: "var(--accent2)" }} onClick={() => bulkAction("delete")}>🗑️ Delete</button>
+            <select
+              className="modal-select"
+              style={{ margin: 0, width: "auto", fontSize: 10, padding: "4px 8px", minHeight: 24 }}
+              value=""
+              onChange={(e) => {
+                if (e.target.value) bulkAction("move", e.target.value);
+              }}
+            >
+              <option value="" disabled>➡️ Move to...</option>
+              {scope !== "global" && <option value="global">🌍 Global</option>}
+              {Object.entries(allGames).map(([id, g]) => (
+                scope !== id ? <option key={id} value={id}>🎮 {g.name || id}</option> : null
+              ))}
+            </select>
             <button className="btn sm" onClick={clearSel}>✕ Clear</button>
           </div>
         )}

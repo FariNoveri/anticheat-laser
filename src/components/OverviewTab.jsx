@@ -42,6 +42,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [abOn, setAbOn] = useState(true);
   const [pmAvatar, setPmAvatar] = useState("kick");
   const [pmAnim, setPmAnim] = useState("kick");
+  const [refreshInterval, setRefreshInterval] = useState("86400");
   const [kickMsgAvatar, setKickMsgAvatar] = useState("");
   const [kickMsgAnim, setKickMsgAnim] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -62,6 +63,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       setAbOn(d.animation_blocker !== false);
       setPmAvatar(d.punishment_mode_avatar || "kick");
       setPmAnim(d.punishment_mode_anim || "kick");
+      if (d.refresh_interval) setRefreshInterval(d.refresh_interval);
       if (d.kick_message_avatar) setKickMsgAvatar(d.kick_message_avatar);
       if (d.kick_message_anim) setKickMsgAnim(d.kick_message_anim);
       if (d.webhook_url) setWebhookUrl(d.webhook_url);
@@ -118,6 +120,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
           <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>Affects all registered games</div>
         </div>
         <div className="global-body">
+          {msgRow("System Refresh Interval (Detik)", "Default: 86400 (24 Jam)", refreshInterval, setRefreshInterval, "refresh_interval")}
           {globalToggleRow("Anticheat System",
             "Avatar banned item check (body, clothing, accessories) — globally",
             acOn, (v) => { setAcOn(v); handleGlobal("anticheat", v); })}
