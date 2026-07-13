@@ -6,7 +6,7 @@ import { useStore } from "./hooks/useStore";
 
 import LoginScreen from "./components/LoginScreen";
 import Header from "./components/Header";
-import { Toast } from "./components/UI";
+import { Toast, ConfirmDeleteModal } from "./components/UI";
 import { ForcePushBar, GlobalControls } from "./components/OverviewTab";
 import GamesTab, { GameModal } from "./components/GamesTab";
 import AnimationsTab from "./components/AnimationsTab";
