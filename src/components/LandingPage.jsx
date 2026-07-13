@@ -56,18 +56,18 @@ export default function LandingPage() {
       <section id="features" className="cutecore-features">
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
-          <h3>Avatar Scanner</h3>
-          <p className="blurred-secret">Instantly detects and kicks players wearing banned clothing, faces, or accessories before they even spawn.</p>
+          <h3>Keep Hidden</h3>
+          <p>Top secret bypass-proof detection methods. Cuman Fari Noveri yang tau.</p>
         </div>
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
-          <h3>Animation Blocker</h3>
-          <p className="blurred-secret">Prevents exploiters from using glitched or inappropriate animations. Keeps your game family-friendly.</p>
+          <h3>Always Update</h3>
+          <p>Continuously updated behind the scenes to patch the latest vulnerabilities.</p>
         </div>
         <div className="cutecore-card">
           <div className="cutecore-card-icon"></div>
           <h3>Discord Webhooks</h3>
-          <p>Get beautiful, real-time alerts sent straight to your Discord server whenever someone is caught.</p>
+          <p>Get real-time alerts sent straight to your Discord server whenever someone is caught.</p>
         </div>
       </section>
 
