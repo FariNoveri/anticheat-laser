@@ -73,11 +73,11 @@ export default function LandingPage() {
 
       {/* Pricing - Robux */}
       <section id="pricing" className="cutecore-pricing">
-        <h2>Purchase via Robux 🎮</h2>
+        <h2>Purchase via Robux</h2>
         <p style={{color: "#8c5a77", marginBottom: "40px", fontSize: "18px"}}>
           Buy directly in our game! Automatic activation.<br/>
           <a href="https://www.roblox.com/games/129854094474638/Testing-Code-Map" target="_blank" rel="noreferrer" style={{color: "#ff3399", fontWeight: "bold", textDecoration: "none"}}>
-            👉 Click here to play the map 👈
+            Click here to play the map
           </a>
         </p>
         <div className="pricing-grid">
@@ -139,7 +139,7 @@ export default function LandingPage() {
 
       {/* Pricing - Real Money */}
       <section className="cutecore-pricing" style={{paddingTop: 0}}>
-        <h2>Purchase via Real Money 💸</h2>
+        <h2>Purchase via Real Money</h2>
         <div style={{background: "rgba(255, 255, 255, 0.7)", padding: "20px", borderRadius: "15px", maxWidth: "600px", margin: "0 auto 40px auto", border: "2px dashed #ff66b2"}}>
           <p style={{color: "#5c3a4f", fontSize: "16px", margin: 0, lineHeight: "1.6"}}>
             <strong>1. Transfer ke:</strong> <span style={{fontSize: "18px", color: "#ff3399", fontWeight: "bold"}}>083809803142</span><br/>

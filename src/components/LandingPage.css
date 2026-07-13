@@ -233,7 +233,7 @@
 }
 
 .pricing-features li::before {
-  content: '✨ ';
+  content: '• ';
 }
 
 .cutecore-footer {
