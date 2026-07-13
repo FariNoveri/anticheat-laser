@@ -45,6 +45,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [refreshInterval, setRefreshInterval] = useState("86400");
   const [kickMsgAvatar, setKickMsgAvatar] = useState("");
   const [kickMsgAnim, setKickMsgAnim] = useState("");
+  const [kickMsgGlobal, setKickMsgGlobal] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
   const [webhookNotifAvatar, setWNA] = useState(true);
   const [webhookNotifAnim, setWNN] = useState(true);
@@ -66,6 +67,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       if (d.refresh_interval) setRefreshInterval(d.refresh_interval);
       if (d.kick_message_avatar) setKickMsgAvatar(d.kick_message_avatar);
       if (d.kick_message_anim) setKickMsgAnim(d.kick_message_anim);
+      if (d.kick_message_global) setKickMsgGlobal(d.kick_message_global);
       if (d.webhook_url) setWebhookUrl(d.webhook_url);
       setWNA(d.webhook_notify_avatar !== false);
       setWNN(d.webhook_notify_anim !== false);
@@ -159,6 +161,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
           <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>Overrideable per game</div>
         </div>
         <div className="global-body">
+          {msgRow("Default Kick Message — Global Ban", "[AC] Global Ban Mode Active", kickMsgGlobal, setKickMsgGlobal, "kick_message_global")}
           {msgRow("Default Kick Message — Avatar", "[AC] Avatar dilarang terdeteksi!", kickMsgAvatar, setKickMsgAvatar, "kick_message_avatar")}
           {msgRow("Default Kick Message — Animation", "[AC] Animasi dilarang terdeteksi!", kickMsgAnim, setKickMsgAnim, "kick_message_anim")}
         </div>
