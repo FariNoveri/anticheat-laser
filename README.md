@@ -17,9 +17,15 @@ React/Vite admin panel for LASER Anti-Cheat — powered by Firebase & Vercel.
 
 ## Security
 
-- `src/firebase/config.js` dan `src/components/Config.js` di-gitignore (berisi API keys)
-- API proxy memblokir semua akses non-Roblox dengan halaman 403
-- reCAPTCHA v3 terpasang di login page
+- `src/firebase/config.js`, `src/components/Config.js`, and `api/payment.js` are in `.gitignore` to prevent secret leaks
+- API proxy endpoints (`fb-proxy`, `payment`) block non-Roblox HttpService requests and redirect unauthorized users to a fullscreen YouTube troll page
+- reCAPTCHA v3 is active on the login page
+
+## What's New in Version 5.2
+- **Cutecore Aesthetic Theme:** Added a fully themed, animated pink cutecore landing page with snow parallax effects.
+- **Dynamic Kick Messages:** Removed hardcoded global kick fallbacks. Kick messages are now completely driven by the Web Panel configuration.
+- **API Troll Protection:** Any attempt to bypass the API via browser or dummy requests will trigger a fullscreen Rickroll embed.
+- **Updated Pricing:** Trial plan adjusted to 200 Robux and feature cards updated to hide detection secrets.
 
 ## License
 
