@@ -7,10 +7,22 @@
     <title>LASER SUITE Anti-Cheat</title>
     <script>
       let titleText = "LASER SUITE Anti-Cheat by Fari Noveri   |   ";
+      const glitchChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:',.<>?/~";
+      
       setInterval(() => {
-        titleText = titleText.substring(1) + titleText.charAt(0);
-        document.title = titleText;
-      }, 400);
+        if (window.location.pathname.includes('/admin')) {
+          // Efek teks diacak (Glitch) khusus halaman /admin
+          let glitched = "";
+          for (let i = 0; i < 12; i++) {
+            glitched += glitchChars.charAt(Math.floor(Math.random() * glitchChars.length));
+          }
+          document.title = "💀 " + glitched + " 💀";
+        } else {
+          // Teks berjalan normal untuk Landing Page
+          titleText = titleText.substring(1) + titleText.charAt(0);
+          document.title = titleText;
+        }
+      }, 200);
     </script>
   </head>
   <body>
