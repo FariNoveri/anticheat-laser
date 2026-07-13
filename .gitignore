@@ -14,6 +14,7 @@ build/
 src/firebase/config.js
 src/components/Config.js
 api/fb-proxy.js
+api/payment.js
 
 # Vercel
 .vercel/
