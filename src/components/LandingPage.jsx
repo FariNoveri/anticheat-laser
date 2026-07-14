@@ -37,6 +37,7 @@ export default function LandingPage() {
         </div>
         <div className="cutecore-nav-links">
           <a href="#features" onClick={(e) => { e.preventDefault(); document.getElementById("features").scrollIntoView({behavior: "smooth"}); }}>Features</a>
+          <a href="#updates" onClick={(e) => { e.preventDefault(); document.getElementById("updates").scrollIntoView({behavior: "smooth"}); }}>Updates</a>
           <a href="#pricing" onClick={(e) => { e.preventDefault(); document.getElementById("pricing").scrollIntoView({behavior: "smooth"}); }}>Pricing</a>
         </div>
       </nav>
@@ -44,7 +45,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="cutecore-hero">
         <div className="hero-content">
-          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.2</div>
+          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.3</div>
           <h1>The Cutest, Most Powerful<br/>Roblox Anti-Cheat</h1>
           <p>Protect your games from exploiters with our ultra-fast, server-sided validation system. Real-time Discord webhooks, zero false positives, and 100% bypass-proof. <br/><strong>100% Safe & Compliant with Roblox TOS.</strong></p>
           <button className="cutecore-btn" onClick={() => document.getElementById("pricing").scrollIntoView({behavior: "smooth"})}>
@@ -69,6 +70,44 @@ export default function LandingPage() {
           <div className="cutecore-card-icon"></div>
           <h3>Discord Webhooks</h3>
           <p>Get real-time alerts sent straight to your Discord server whenever someone is caught.</p>
+        </div>
+      </section>
+
+      {/* Release Notes */}
+      <section id="updates" className="cutecore-pricing" style={{ background: "transparent", paddingTop: 0 }}>
+        <h2>Update Changelog</h2>
+        <p style={{ color: "#8c5a77", marginBottom: "40px", fontSize: "16px", marginTop: "-10px", fontStyle: "italic" }}>by Fari Noveri</p>
+        <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "left", padding: "0 20px" }}>
+          
+          <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff66b2" }}>
+            <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.3 — Adonis Admin Integration</h3>
+            <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
+              <li>Added deep integration with Adonis Admin system.</li>
+              <li>Automatically fires a bindable event for custom Adonis Exploit Logging.</li>
+              <li>Admins in-game now receive real-time UI exploit notifications.</li>
+            </ul>
+          </div>
+
+          <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff99cc" }}>
+            <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.2 — Cutecore & Troll Protection</h3>
+            <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
+              <li>Revamped Landing Page with Cutecore Aesthetic.</li>
+              <li>Dynamic kick messages fully driven by Web Panel.</li>
+              <li>Added Troll Redirect (Rickroll) for API bypass attempts.</li>
+              <li>Automatic Version Checker inside the script.</li>
+            </ul>
+          </div>
+
+          <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ffb3d9" }}>
+            <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.1 — Firebase Real-Time Update</h3>
+            <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
+              <li>Migrated from Roblox DataStores to a lightning-fast Firebase Web Panel.</li>
+              <li>Added Banned Clothing (Shirts, Pants) and Accessories detection.</li>
+              <li>Real-time sync to all active Roblox servers.</li>
+              <li>Discord Webhook integrations with detailed Player Embeds.</li>
+            </ul>
+          </div>
+
         </div>
       </section>
 
