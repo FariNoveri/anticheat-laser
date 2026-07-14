@@ -21,11 +21,13 @@ React/Vite admin panel for LASER Anti-Cheat — powered by Firebase & Vercel.
 - API proxy endpoints (`fb-proxy`, `payment`) block non-Roblox HttpService requests and redirect unauthorized users to a fullscreen YouTube troll page
 - reCAPTCHA v3 is active on the login page
 
-## What's New in Version 5.2
-- **Cutecore Aesthetic Theme:** Added a fully themed, animated pink cutecore landing page with snow parallax effects.
-- **Dynamic Kick Messages:** Removed hardcoded global kick fallbacks. Kick messages are now completely driven by the Web Panel configuration.
-- **API Troll Protection:** Any attempt to bypass the API via browser or dummy requests will trigger a fullscreen Rickroll embed.
-- **Updated Pricing:** Trial plan adjusted to 200 Robux and feature cards updated to hide detection secrets.
+## What's New in Version 5.3
+- **Adonis Admin Integration:** Built-in support to automatically pipe exploit detections into the Adonis Admin system.
+- **In-Game Notifications:** Admins now receive real-time UI notifications inside the game.
+- **Exploit Logs:** Exploit history is logged and can be viewed via the `;exploitlogs` command in Adonis.
+- **Version Checker:** The script now checks for updates and warns users if they are on an outdated version.
+
+*Note: For the full history of updates and to download the latest scripts, please check our [Releases Page](https://github.com/FariNoveri/anticheat-laser/releases).*
 
 ## License
 
