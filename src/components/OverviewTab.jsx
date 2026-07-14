@@ -225,6 +225,13 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
 // ── Overview Tab ─────────────────────────────────────────
 export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, onEdit, onDelete }) {
   const [search, setSearch] = useState("");
+  const [dbLatestVersion, setDbLatestVersion] = useState("Loading...");
+
+  useEffect(() => {
+    return onValue(ref(db, "global/latest_version"), (snap) => {
+      setDbLatestVersion(snap.val() || "N/A");
+    });
+  }, []);
 
   const games = Object.entries(allGames).filter(([id, g]) => {
     if (!search) return true;
@@ -242,6 +249,7 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
         <div className="stat-card"><div className="stat-label">Total Games</div><div className="stat-value">{total}</div></div>
         <div className="stat-card"><div className="stat-label">AC Enabled</div><div className="stat-value">{enabled}</div></div>
         <div className="stat-card"><div className="stat-label">AC Disabled</div><div className="stat-value red">{total - enabled}</div></div>
+        <div className="stat-card"><div className="stat-label">Latest Version</div><div className="stat-value" style={{color: "var(--accent2)"}}>{dbLatestVersion}</div></div>
       </div>
 
       <div className="toolbar">
