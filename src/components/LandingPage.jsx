@@ -44,6 +44,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="cutecore-hero">
         <div className="hero-content">
+          <div style={{ display: "inline-block", background: "var(--accent)", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.2</div>
           <h1>The Cutest, Most Powerful<br/>Roblox Anti-Cheat</h1>
           <p>Protect your games from exploiters with our ultra-fast, server-sided validation system. Real-time Discord webhooks, zero false positives, and 100% bypass-proof. <br/><strong>100% Safe & Compliant with Roblox TOS.</strong></p>
           <button className="cutecore-btn" onClick={() => document.getElementById("pricing").scrollIntoView({behavior: "smooth"})}>
