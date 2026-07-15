@@ -16,8 +16,7 @@ const TROLL_HTML = `<!DOCTYPE html>
   document.addEventListener('DOMContentLoaded', () => {
     for(let i=0; i<10; i++) {
       let img = document.createElement('img');
-      img.src = "https://media.tenor.com/qtlffDdzsU6.gif"; // fallback direct media link
-      img.onerror = function() { this.src = "https://tenor.com/qtlffDdzsU6.gif"; }; // user link
+      img.src = "https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif"; // Reliable GIF URL
       img.className = 'gif';
       document.body.appendChild(img);
 
