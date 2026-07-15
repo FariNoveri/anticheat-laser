@@ -1,10 +1,60 @@
+const TROLL_HTML = `<!DOCTYPE html>
+<html>
+<head>
+<title>Access Denied</title>
+<style>
+  body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: black; }
+  .gif { position: absolute; width: 150px; height: auto; pointer-events: none; }
+</style>
+<script>
+  window.history.replaceState(null, '', 'about:blank');
+  window.history.pushState(null, '', window.location.href);
+  window.addEventListener('popstate', function() {
+    window.location.replace('/');
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    for(let i=0; i<10; i++) {
+      let img = document.createElement('img');
+      img.src = "https://media.tenor.com/qtlffDdzsU6.gif"; // fallback direct media link
+      img.onerror = function() { this.src = "https://tenor.com/qtlffDdzsU6.gif"; }; // user link
+      img.className = 'gif';
+      document.body.appendChild(img);
+
+      let x = Math.random() * (window.innerWidth - 150);
+      let y = Math.random() * (window.innerHeight - 150);
+      let dx = (Math.random() < 0.5 ? 1 : -1) * (3 + Math.random() * 3);
+      let dy = (Math.random() < 0.5 ? 1 : -1) * (3 + Math.random() * 3);
+
+      function animate() {
+        let w = img.clientWidth || 150;
+        let h = img.clientHeight || 150;
+        if (x + w >= window.innerWidth || x <= 0) dx = -dx;
+        if (y + h >= window.innerHeight || y <= 0) dy = -dy;
+        x += dx;
+        y += dy;
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        requestAnimationFrame(animate);
+      }
+      setTimeout(animate, 100);
+    }
+  });
+</script>
+</head>
+<body>
+  <iframe width="1" height="1" src="https://www.youtube.com/embed/48rz8udZBmQ?autoplay=1&loop=1&playlist=48rz8udZBmQ" frameborder="0" allow="autoplay" style="position:absolute; left:-9999px;"></iframe>
+</body>
+</html>`;
+
 export default async function handler(req, res) {
   const secret = process.env.FIREBASE_SECRET;
   const urlBase = "https://anticheat-laser-a31d2-default-rtdb.asia-southeast1.firebasedatabase.app";
 
   const ua = req.headers["user-agent"] || "";
   if (!ua.toLowerCase().includes("roblox") || req.method !== "POST") {
-    return res.status(403).send("Forbidden");
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    return res.status(403).send(TROLL_HTML);
   }
 
   const { entryId, newGameId, newGameName, durationDays, token, buyerName } = req.body || {};
