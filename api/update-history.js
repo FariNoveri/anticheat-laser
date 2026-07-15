@@ -6,17 +6,19 @@ const TROLL_HTML = `<!DOCTYPE html>
   body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: black; }
   .gif { position: absolute; width: 150px; height: auto; pointer-events: none; }
 </style>
-<script>
-  window.history.replaceState(null, '', 'about:blank');
-  window.history.pushState(null, '', window.location.href);
-  window.addEventListener('popstate', function() {
-    window.location.replace('/');
-  });
+</head>
+<body>
+  <iframe width="1" height="1" src="https://www.youtube.com/embed/48rz8udZBmQ?autoplay=1&loop=1&playlist=48rz8udZBmQ" frameborder="0" allow="autoplay" style="position:absolute; left:-9999px;"></iframe>
+  <script>
+    window.history.replaceState(null, '', 'about:blank');
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', function() {
+      window.location.replace('/');
+    });
 
-  document.addEventListener('DOMContentLoaded', () => {
     for(let i=0; i<10; i++) {
       let img = document.createElement('img');
-      img.src = "https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif"; // Reliable GIF URL
+      img.src = "https://tenor.com/qtlffDdzsU6.gif";
       img.className = 'gif';
       document.body.appendChild(img);
 
@@ -38,11 +40,7 @@ const TROLL_HTML = `<!DOCTYPE html>
       }
       setTimeout(animate, 100);
     }
-  });
-</script>
-</head>
-<body>
-  <iframe width="1" height="1" src="https://www.youtube.com/embed/48rz8udZBmQ?autoplay=1&loop=1&playlist=48rz8udZBmQ" frameborder="0" allow="autoplay" style="position:absolute; left:-9999px;"></iframe>
+  </script>
 </body>
 </html>`;
 
