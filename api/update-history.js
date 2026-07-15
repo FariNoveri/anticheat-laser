@@ -35,10 +35,20 @@ export default async function handler(req, res) {
       })
     });
 
-    // 1.5 Delete old game entry if it changed
+    let transferredExpiry = 0;
+
+    // 1.5 Delete old game entry if it changed and get its expiry
     if (oldGameId && oldGameId !== newGameId) {
       const oldGameUrl = `${urlBase}/games/${oldGameId}.json?auth=${encodeURIComponent(secret)}`;
+      const oldGameRes = await fetch(oldGameUrl);
+      const oldGameData = (await oldGameRes.json()) || {};
+      transferredExpiry = oldGameData.expiry || 0;
+      
       await fetch(oldGameUrl, { method: "DELETE" });
+    } else if (!oldGameId || oldGameId === "") {
+      // First time setting a Game ID, calculate expiry from purchase timestamp
+      const purchaseTime = oldHistory.timestamp || Math.floor(Date.now() / 1000);
+      transferredExpiry = purchaseTime + (durationDays * 86400);
     }
 
     // 2. Update games license expiry
@@ -46,12 +56,10 @@ export default async function handler(req, res) {
     const getRes = await fetch(gameUrl);
     const existingData = (await getRes.json()) || {};
     
-    const currentExpiry = existingData.expiry || 0;
-    const now = Math.floor(Date.now() / 1000);
-    let newExpiry = now + (durationDays * 86400);
+    let newExpiry = existingData.expiry || 0;
     
-    if (currentExpiry > now) {
-      newExpiry = currentExpiry + (durationDays * 86400);
+    if (transferredExpiry > 0) {
+      newExpiry = Math.max(newExpiry, transferredExpiry);
     }
 
     const updatedData = {
