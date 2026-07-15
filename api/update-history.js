@@ -18,7 +18,7 @@ const TROLL_HTML = `<!DOCTYPE html>
 
     for(let i=0; i<10; i++) {
       let img = document.createElement('img');
-      img.src = "https://tenor.com/qtlffDdzsU6.gif";
+      img.src = "https://media1.tenor.com/m/vfcEJwmL0C4AAAAd/you-are-an-idiot-malware.gif";
       img.className = 'gif';
       document.body.appendChild(img);
 
