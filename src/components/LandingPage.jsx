@@ -45,7 +45,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="cutecore-hero">
         <div className="hero-content">
-          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.3</div>
+          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.4</div>
           <h1>The Cutest, Most Powerful<br/>Roblox Anti-Cheat</h1>
           <p>Protect your games from exploiters with our ultra-fast, server-sided validation system. Real-time Discord webhooks, zero false positives, and 100% bypass-proof. <br/><strong>100% Safe & Compliant with Roblox TOS.</strong></p>
           <button className="cutecore-btn" onClick={() => document.getElementById("pricing").scrollIntoView({behavior: "smooth"})}>
@@ -79,6 +79,15 @@ export default function LandingPage() {
         <p style={{ color: "#8c5a77", marginBottom: "40px", fontSize: "16px", marginTop: "-10px", fontStyle: "italic" }}>by Fari Noveri</p>
         <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "left", padding: "0 20px" }}>
           
+          <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff1493" }}>
+            <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.4 — Payload Encryption & Modularity</h3>
+            <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
+              <li>Added Luraph-style Payload Encryption (ROT47) for ultimate API protection.</li>
+              <li>Refactored AntiCheat into ultra-clean Core modules (60 lines main script).</li>
+              <li>Adonis UI logs now include action (KICK/DISABLE) and user details.</li>
+            </ul>
+          </div>
+
           <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff66b2" }}>
             <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.3 — Adonis Admin Integration</h3>
             <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
