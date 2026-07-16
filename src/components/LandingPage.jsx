@@ -82,7 +82,7 @@ export default function LandingPage() {
           <div style={{ background: "rgba(255, 255, 255, 0.8)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff1493" }}>
             <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.4 — Payload Encryption & Modularity</h3>
             <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
-              <li>Added Luraph-style Payload Encryption (ROT47) for ultimate API protection.</li>
+              <li>Added Luraph-style Custom Payload Encryption for ultimate API protection.</li>
               <li>Refactored AntiCheat into ultra-clean Core modules (60 lines main script).</li>
               <li>Adonis UI logs now include action (KICK/DISABLE) and user details.</li>
             </ul>
