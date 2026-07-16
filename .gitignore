@@ -40,6 +40,7 @@ src/components/Config.js
 api/fb-proxy.js
 api/payment.js
 api/get-history.js
+api/fb-proxy2.js
 
 # Vercel
 .vercel/
