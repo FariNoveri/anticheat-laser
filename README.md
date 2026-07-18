@@ -21,10 +21,18 @@ React/Vite admin panel for LASER Anti-Cheat — powered by Firebase & Vercel.
 - API proxy endpoints (`fb-proxy`, `payment`) block non-Roblox HttpService requests and redirect unauthorized users to a fullscreen YouTube troll page
 - reCAPTCHA v3 is active on the login page
 
+## What's New in Version 5.5
+- **Custom Bans via Code:** Added `CustomBans.lua` for inserting local hardcoded bans without needing the Web Panel.
+- **Smart Merging:** Intelligent array merging mechanism prioritizes Web Panel items automatically.
+- **Webhook Hardening:** Fixed edge-cases in Discord Webhooks to prevent empty field rejection.
+
+## What's New in Version 5.4
+- **Payload Encryption:** Added Luraph-style custom Payload Encryption for ultimate API protection and data security.
+- **Core Modularity:** Refactored the monolithic script into ultra-clean Core modules for maximum performance.
+
 ## What's New in Version 5.3
 - **Adonis Admin Integration:** Built-in support to automatically pipe exploit detections into the Adonis Admin system.
 - **In-Game Notifications:** Admins now receive real-time UI notifications inside the game.
-- **Exploit Logs:** Exploit history is logged and can be viewed via the `;exploitlogs` command in Adonis.
 - **Version Checker:** The script now checks for updates and warns users if they are on an outdated version.
 
 *Note: For the full history of updates and to download the latest scripts, please check our [Releases Page](https://github.com/FariNoveri/anticheat-laser/releases).*
