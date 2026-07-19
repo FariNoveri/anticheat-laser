@@ -21,8 +21,11 @@ const CAT_FILTERS = [
 ];
 
 // ── Part Selector ─────────────────────────────────────────
-function PartSelector({ value, onChange, onlyBody = false }) {
-  const options = onlyBody ? BODY_PART_OPTIONS : PART_OPTIONS;
+function PartSelector({ value, onChange, onlyBody = false, onlyClothing = false }) {
+  let options = onlyBody ? BODY_PART_OPTIONS : PART_OPTIONS;
+  if (onlyClothing) {
+    options = PART_OPTIONS.filter(opt => !["Head", "Torso", "LeftArm", "RightArm", "LeftLeg", "RightLeg", "FullBody"].includes(opt.value) && opt.group !== "🦴 Body Parts");
+  }
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 4, maxHeight: 200, overflowY: "auto", marginBottom: 10 }}>
       {options.map((opt, i) => {
@@ -118,7 +121,7 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
             )}
 
             <div className="modal-label">Body Part / Type</div>
-            <PartSelector value={row.part} onChange={(v) => update(i, { part: v })} onlyBody={onlyBody} />
+            <PartSelector value={row.part} onChange={(v) => update(i, { part: v })} onlyBody={onlyBody} onlyClothing={onlyClothing} />
 
             <input className="modal-input" placeholder="Note (opsional)" style={{ margin: 0 }}
               value={row.note} onChange={(e) => update(i, { note: e.target.value })} />
