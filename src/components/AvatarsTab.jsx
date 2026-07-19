@@ -150,7 +150,8 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
 export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAvatar, toggleAvatarExclude, showToast, onlyBody = false, onlyClothing = false }) {
   const [scope,        setScope]        = useState("global");
   const [search,       setSearch]       = useState("");
-  const [catFilter,    setCatFilter]    = useState(onlyBody ? "body" : (onlyClothing ? "clothing" : "all"));
+  const [catFilter,    setCatFilter]    = useState(onlyBody ? "body" : "all");
+  const [sortMode,     setSortMode]     = useState("newest");
   const [showModal,    setShowModal]    = useState(false);
   const [editRow,      setEditRow]      = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -178,6 +179,18 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
     if (!search) return true;
     const q = search.toLowerCase();
     return id.includes(q) || (data?.note || "").toLowerCase().includes(q) || (data?.part || "").toLowerCase().includes(q);
+  });
+
+  filtered.sort((a, b) => {
+    const dataA = allAvatars.global?.[a] || allAvatars.per_game?.[scope]?.[a];
+    const dataB = allAvatars.global?.[b] || allAvatars.per_game?.[scope]?.[b];
+    if (sortMode === "newest") return (dataB?.added_at || 0) - (dataA?.added_at || 0);
+    if (sortMode === "oldest") return (dataA?.added_at || 0) - (dataB?.added_at || 0);
+    const noteA = (dataA?.note || "").toLowerCase();
+    const noteB = (dataB?.note || "").toLowerCase();
+    if (sortMode === "az") return noteA.localeCompare(noteB);
+    if (sortMode === "za") return noteB.localeCompare(noteA);
+    return 0;
   });
 
   const toggleSel = (id) => setSelected((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id]);
@@ -254,6 +267,16 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
       <div style={{ display: "flex", gap: 8, marginBottom: 12, alignItems: "center", flexWrap: "wrap" }}>
         <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>View / Add to:</span>
         <ScopeSelector value={scope} onChange={setScope} allGames={allGames} accentVar="--accent5" />
+        
+        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)", marginLeft: "auto" }}>Sort:</span>
+        <select className="modal-select" style={{ margin: 0, width: "auto", fontSize: 10, padding: "4px 8px", minHeight: 24, border: "1px solid var(--border)" }}
+          value={sortMode} onChange={(e) => setSortMode(e.target.value)}>
+          <option value="newest">⏳ Newest</option>
+          <option value="oldest">⌛ Oldest</option>
+          <option value="az">🔤 Name (A-Z)</option>
+          <option value="za">🔠 Name (Z-A)</option>
+        </select>
+        
         {selected.length > 0 && (
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent3)" }}>{selected.length} selected</span>

@@ -97,6 +97,7 @@ function AnimModal({ show, onClose, onSave, scope, allGames, editRow }) {
 export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim, toggleAnimExclude, showToast }) {
   const [scope,      setScope]      = useState("global");
   const [search,     setSearch]     = useState("");
+  const [sortMode,   setSortMode]   = useState("newest");
   const [showModal,  setShowModal]  = useState(false);
   const [editRow,    setEditRow]    = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -111,7 +112,20 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
   const filtered = animIds.filter((id) => {
     if (!search) return true;
     const q = search.toLowerCase();
-    return id.includes(q) || (allAnims.global?.[id]?.note || "").toLowerCase().includes(q);
+    const data = allAnims.global?.[id] || allAnims.per_game?.[scope]?.[id];
+    return id.includes(q) || (data?.note || "").toLowerCase().includes(q);
+  });
+
+  filtered.sort((a, b) => {
+    const dataA = allAnims.global?.[a] || allAnims.per_game?.[scope]?.[a];
+    const dataB = allAnims.global?.[b] || allAnims.per_game?.[scope]?.[b];
+    if (sortMode === "newest") return (dataB?.added_at || 0) - (dataA?.added_at || 0);
+    if (sortMode === "oldest") return (dataA?.added_at || 0) - (dataB?.added_at || 0);
+    const noteA = (dataA?.note || dataA?.name || "").toLowerCase();
+    const noteB = (dataB?.note || dataB?.name || "").toLowerCase();
+    if (sortMode === "az") return noteA.localeCompare(noteB);
+    if (sortMode === "za") return noteB.localeCompare(noteA);
+    return 0;
   });
 
   const toggleSel = (id) => setSelected((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id]);
@@ -178,6 +192,16 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
       <div style={{ display: "flex", gap: 8, marginBottom: 12, alignItems: "center", flexWrap: "wrap" }}>
         <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>View / Add to:</span>
         <ScopeSelector value={scope} onChange={setScope} allGames={allGames} accentVar="--accent4" />
+        
+        <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)", marginLeft: "auto" }}>Sort:</span>
+        <select className="modal-select" style={{ margin: 0, width: "auto", fontSize: 10, padding: "4px 8px", minHeight: 24, border: "1px solid var(--border)" }}
+          value={sortMode} onChange={(e) => setSortMode(e.target.value)}>
+          <option value="newest">⏳ Newest</option>
+          <option value="oldest">⌛ Oldest</option>
+          <option value="az">🔤 Name (A-Z)</option>
+          <option value="za">🔠 Name (Z-A)</option>
+        </select>
+        
         {selected.length > 0 && (
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent3)" }}>{selected.length} selected</span>
