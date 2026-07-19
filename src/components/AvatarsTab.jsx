@@ -14,7 +14,10 @@ const BODY_PART_OPTIONS = [
 ];
 
 const CAT_FILTERS = [
+  { id: "all", label: "🌍 All" },
   { id: "body", label: "🦴 Body" },
+  { id: "clothing", label: "👕 Clothing" },
+  { id: "accessory", label: "🎩 Accessory" },
 ];
 
 // ── Part Selector ─────────────────────────────────────────

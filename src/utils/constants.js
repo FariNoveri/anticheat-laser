@@ -6,7 +6,7 @@ export const pmDesc = (type) => ({
     : "Semua pakaian, aksesoris, dan mesh pada avatar akan dihapus (Naked).",
 });
 
-// ASSET_TYPE_MAP removed — only body-part controls are supported now.
+// ASSET_TYPE_MAP removed — only body-part controls are supported now. (Restored Clothing/Accessories)
 
 export const PART_OPTIONS = [
   { group: "🦴 Body Parts" },
@@ -17,6 +17,11 @@ export const PART_OPTIONS = [
   { value: "LeftLeg",   label: "Left Leg" },
   { value: "RightLeg",  label: "Right Leg" },
   { value: "FullBody",  label: "Full Body" },
+  { group: "👕 Clothing & Accs" },
+  { value: "Shirt",     label: "Shirt (Baju)" },
+  { value: "Pants",     label: "Pants (Celana)" },
+  { value: "GraphicTShirt", label: "T-Shirt" },
+  { value: "Any",       label: "Any Accessory" },
 ];
 
 export const PART_CATEGORY = {
@@ -27,4 +32,8 @@ export const PART_CATEGORY = {
   LeftLeg: "body",
   RightLeg: "body",
   FullBody: "body",
+  Shirt: "clothing",
+  Pants: "clothing",
+  GraphicTShirt: "clothing",
+  Any: "accessory",
 };
