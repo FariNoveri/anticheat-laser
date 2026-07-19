@@ -209,7 +209,7 @@ export default function LandingPage() {
 
           <div className="pricing-card">
             <h3>Monthly Plan</h3>
-            <div className="price" style={{fontSize: "42px"}}>Rp150k</div>
+            <div className="price" style={{fontSize: "42px"}}>Rp240k</div>
             <p style={{color: "#8c5a77", marginBottom: 20}}>For 1 Month</p>
             <ul className="pricing-features">
               <li>1 Month Access</li>
