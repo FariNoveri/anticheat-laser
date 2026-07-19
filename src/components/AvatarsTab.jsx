@@ -47,17 +47,17 @@ function PartSelector({ value, onChange, onlyBody = false }) {
 }
 
 // ── Avatar Modal (Add / Edit) ─────────────────────────────
-function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody = false }) {
-  const [rows, setRows] = useState([{ id: "", note: "", part: onlyBody ? "Head" : "Any", name: "", status: null, fetching: false }]);
+function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody = false, onlyClothing = false }) {
+  const [rows, setRows] = useState([{ id: "", note: "", part: onlyBody ? "Head" : (onlyClothing ? "Shirt" : "Any"), name: "", status: null, fetching: false }]);
 
   React.useEffect(() => {
     if (!show) return;
     if (editRow) {
-      setRows([{ id: editRow.id, note: editRow.data?.note || "", part: editRow.data?.part || (onlyBody ? "Head" : "Any"), name: editRow.data?.name || "", status: null, fetching: false }]);
+      setRows([{ id: editRow.id, note: editRow.data?.note || "", part: editRow.data?.part || (onlyBody ? "Head" : (onlyClothing ? "Shirt" : "Any")), name: editRow.data?.name || "", status: null, fetching: false }]);
     } else {
-      setRows([{ id: "", note: "", part: onlyBody ? "Head" : "Any", name: "", status: null, fetching: false }]);
+      setRows([{ id: "", note: "", part: onlyBody ? "Head" : (onlyClothing ? "Shirt" : "Any"), name: "", status: null, fetching: false }]);
     }
-  }, [show, editRow, onlyBody]);
+  }, [show, editRow, onlyBody, onlyClothing]);
 
   const update = (i, patch) => setRows((r) => r.map((row, j) => j === i ? { ...row, ...patch } : row));
 
@@ -74,7 +74,7 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
     }
   };
 
-  const addRow = () => setRows((r) => [...r, { id: "", note: "", part: onlyBody ? "Head" : "Any", name: "", status: null, fetching: false }]);
+  const addRow = () => setRows((r) => [...r, { id: "", note: "", part: onlyBody ? "Head" : (onlyClothing ? "Shirt" : "Any"), name: "", status: null, fetching: false }]);
   const removeRow = (i) => setRows((r) => r.filter((_, j) => j !== i));
 
   const handleSave = () => {
@@ -117,7 +117,7 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
               </div>
             )}
 
-            <div className="modal-label">Body Part</div>
+            <div className="modal-label">Body Part / Type</div>
             <PartSelector value={row.part} onChange={(v) => update(i, { part: v })} onlyBody={onlyBody} />
 
             <input className="modal-input" placeholder="Note (opsional)" style={{ margin: 0 }}
@@ -144,10 +144,10 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
 }
 
 // ── Avatars Tab ───────────────────────────────────────────
-export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAvatar, toggleAvatarExclude, showToast, onlyBody = false }) {
+export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAvatar, toggleAvatarExclude, showToast, onlyBody = false, onlyClothing = false }) {
   const [scope,        setScope]        = useState("global");
   const [search,       setSearch]       = useState("");
-  const [catFilter,    setCatFilter]    = useState(onlyBody ? "body" : "all");
+  const [catFilter,    setCatFilter]    = useState(onlyBody ? "body" : (onlyClothing ? "clothing" : "all"));
   const [showModal,    setShowModal]    = useState(false);
   const [editRow,      setEditRow]      = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -164,6 +164,10 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
     if (onlyBody) {
       const cat = PART_CATEGORY[data?.part || "Any"] || "accessory";
       if (cat !== "body") return false;
+    } else if (onlyClothing) {
+      const cat = PART_CATEGORY[data?.part || "Any"] || "accessory";
+      if (cat === "body") return false;
+      if (catFilter !== "all" && cat !== catFilter) return false;
     } else if (catFilter !== "all") {
       const cat = PART_CATEGORY[data?.part || "Any"] || "accessory";
       if (cat !== catFilter) return false;
@@ -227,7 +231,7 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
   return (
     <div id="section-avatars">
       <div className="toolbar">
-        <div className="toolbar-title">{onlyBody ? "BANNED BODY ITEMS" : "BANNED AVATAR ITEMS"}</div>
+        <div className="toolbar-title">{onlyBody ? "BANNED BODY ITEMS" : "BANNED CLOTHING & ACCS"}</div>
         <div className="toolbar-right">
           <button className="btn blue" onClick={() => { setEditRow(null); setShowModal(true); }}>+ ADD</button>
         </div>
@@ -236,7 +240,7 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
       {!onlyBody && (
         <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap", alignItems: "center" }}>
           <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>Filter:</span>
-          {CAT_FILTERS.map((f) => (
+          {CAT_FILTERS.filter(f => !onlyClothing || f.id !== "body").map((f) => (
             <button key={f.id} className="btn sm"
               style={{ borderColor: catFilter === f.id ? "var(--accent5)" : "var(--border)", color: catFilter === f.id ? "var(--accent5)" : "var(--text)" }}
               onClick={() => setCatFilter(f.id)}>{f.label}</button>
@@ -347,7 +351,7 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
       </div>
 
       <AvatarModal show={showModal} onClose={() => setShowModal(false)} onSave={handleSave}
-        scope={scope} allGames={allGames} editRow={editRow} onlyBody={onlyBody} />
+        scope={scope} allGames={allGames} editRow={editRow} onlyBody={onlyBody} onlyClothing={onlyClothing} />
 
       <ConfirmDeleteModal
         show={!!deleteTarget}

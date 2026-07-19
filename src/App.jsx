@@ -136,6 +136,18 @@ function AdminApp() {
             />
           )}
 
+          {activeTab === "clothing" && (
+            <AvatarsTab
+              onlyClothing
+              allAvatars={store.allAvatars}
+              allGames={store.allGames}
+              saveAvatar={store.saveAvatar}
+              deleteAvatar={store.deleteAvatar}
+              toggleAvatarExclude={store.toggleAvatarExclude}
+              showToast={showToast}
+            />
+          )}
+
           {activeTab === "announce" && (
             <AnnounceTab
               allGames={store.allGames}

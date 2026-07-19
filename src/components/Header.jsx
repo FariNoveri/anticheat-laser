@@ -8,6 +8,7 @@ const TABS = [
   { id: "games",     label: "🎮 GAMES" },
   { id: "emotes",    label: "🎭 EMOTE / ANIM" },
   { id: "body",      label: "🦴 BODY" },
+  { id: "clothing",  label: "👕 CLOTHING & ACCS" },
   { id: "history",   label: "🧾 HISTORY" },
 ];
 
