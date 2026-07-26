@@ -55,7 +55,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="cutecore-hero">
         <div className="hero-content">
-          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.5</div>
+          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.4</div>
           <h1>The Cutest, Most Powerful<br/>Roblox Anti-Cheat</h1>
           <p>Protect your games from exploiters with our ultra-fast, server-sided validation system. Real-time Discord webhooks, zero false positives, and 100% bypass-proof. <br/><strong>100% Safe & Compliant with Roblox TOS.</strong></p>
           <button className="cutecore-btn" onClick={() => document.getElementById("pricing").scrollIntoView({behavior: "smooth"})}>
@@ -249,22 +249,13 @@ export default function LandingPage() {
               <button onClick={() => setShowChangelogPopup(false)} style={{ background: "transparent", border: "none", color: "#fff", fontSize: "24px", cursor: "pointer", fontWeight: "bold" }}>×</button>
             </div>
             <div style={{ padding: "20px", overflowY: "auto", textAlign: "left" }}>
-              
               <div style={{ background: "rgba(255, 102, 178, 0.1)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff1493" }}>
-                <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.5 — Custom Bans via Code</h3>
-                <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
-                  <li>Added `CustomBans.lua` for adding local hardcoded bans without Web Panel.</li>
-                  <li>Intelligent array merging mechanism prioritizes Web Panel items automatically.</li>
-                  <li>Fixed edge-cases in Discord Webhooks to prevent empty field rejection.</li>
-                </ul>
-              </div>
-
-              <div style={{ background: "rgba(255, 102, 178, 0.05)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff66b2" }}>
                 <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.4 — Payload Encryption & Modularity</h3>
                 <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
                   <li>Added Luraph-style Custom Payload Encryption for ultimate API protection.</li>
                   <li>Refactored AntiCheat into ultra-clean Core modules (60 lines main script).</li>
                   <li>Adonis UI logs now include action (KICK/DISABLE) and user details.</li>
+                  <li>Added "Load More" infinite scrolling to the Web Panel for better performance.</li>
                 </ul>
               </div>
 

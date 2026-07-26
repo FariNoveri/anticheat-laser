@@ -153,6 +153,7 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
   const [catFilter,    setCatFilter]    = useState(onlyBody ? "body" : "all");
   const [sortMode,     setSortMode]     = useState("newest");
   const [showModal,    setShowModal]    = useState(false);
+  const [visibleCount, setVisibleCount] = useState(50);
   const [editRow,      setEditRow]      = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [selected,     setSelected]     = useState([]);
@@ -321,7 +322,7 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
           <tbody>
             {!filtered.length
               ? <tr><td colSpan={8}><div className="state-msg"><span className="big">🦴</span>{onlyBody ? "No banned body items" : `No banned items${catFilter !== "all" ? " in this category" : ""}`}</div></td></tr>
-              : filtered.map((id) => {
+              : filtered.slice(0, visibleCount).map((id) => {
                   const gData  = allAvatars.global?.[id];
                   const pgData = allAvatars.per_game?.[scope]?.[id];
                   const excluded = !isGlobal && !!allAvatars.excluded?.[scope]?.[id];
@@ -375,6 +376,14 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
           </tbody>
         </table>
       </div>
+
+      {visibleCount < filtered.length && (
+        <div style={{ textAlign: "center", marginTop: 16 }}>
+          <button className="btn" onClick={() => setVisibleCount(v => v + 50)} style={{ width: "100%", maxWidth: 300, background: "var(--surface)", border: "1px dashed var(--border)" }}>
+            👇 Load More ({filtered.length - visibleCount} left)
+          </button>
+        </div>
+      )}
 
       <AvatarModal show={showModal} onClose={() => setShowModal(false)} onSave={handleSave}
         scope={scope} allGames={allGames} editRow={editRow} onlyBody={onlyBody} onlyClothing={onlyClothing} />

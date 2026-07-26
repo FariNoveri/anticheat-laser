@@ -99,6 +99,7 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
   const [search,     setSearch]     = useState("");
   const [sortMode,   setSortMode]   = useState("newest");
   const [showModal,  setShowModal]  = useState(false);
+  const [visibleCount, setVisibleCount] = useState(50);
   const [editRow,    setEditRow]    = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [selected,   setSelected]   = useState([]);
@@ -245,8 +246,8 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
           </thead>
           <tbody>
             {!filtered.length
-              ? <tr><td colSpan={6}><div className="state-msg"><span className="big">🎭</span>No banned animations</div></td></tr>
-              : filtered.map((id) => {
+              ? <tr><td colSpan={7}><div className="state-msg"><span className="big">🎭</span>No banned animations</div></td></tr>
+              : filtered.slice(0, visibleCount).map((id) => {
                   const gData  = allAnims.global?.[id];
                   const pgData = allAnims.per_game?.[scope]?.[id];
                   const excluded = !isGlobal && !!allAnims.excluded?.[scope]?.[id];
@@ -300,6 +301,14 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
           </tbody>
         </table>
       </div>
+
+      {visibleCount < filtered.length && (
+        <div style={{ textAlign: "center", marginTop: 16 }}>
+          <button className="btn" onClick={() => setVisibleCount(v => v + 50)} style={{ width: "100%", maxWidth: 300, background: "var(--surface)", border: "1px dashed var(--border)" }}>
+            👇 Load More ({filtered.length - visibleCount} left)
+          </button>
+        </div>
+      )}
 
       <AnimModal show={showModal} onClose={() => setShowModal(false)} onSave={handleSave}
         scope={scope} allGames={allGames} editRow={editRow} />
