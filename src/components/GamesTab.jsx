@@ -110,6 +110,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       animation_blocker: { enabled: animblock },
       punishment_mode_avatar: pmAvatar,
       punishment_mode_anim: pmAnim,
+      ban_duration: banDur || "",
+      ban_reason: banRsn || "",
       webhook_notify_avatar: wNotifAvatar,
       webhook_notify_anim: wNotifAnim,
       webhook_show_id_avatar: wShowIdAvatar,
