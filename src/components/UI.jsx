@@ -36,12 +36,13 @@ export function ExpiryBadge({ expiry }) {
 }
 
 export function PunishModeGrid({ type, value, onChange, allowGlobal }) {
-  const modes = allowGlobal ? ["global", "kick", "respawn", "disable"] : ["kick", "respawn", "disable"];
+  const modes = allowGlobal ? ["global", "kick", "respawn", "disable", "ban"] : ["kick", "respawn", "disable", "ban"];
 
   const labels = {
     global:  { icon: "🌍 GLOBAL",   sub: "ikut pusat" },
     kick:    { icon: "🚫 KICK",     sub: "keluarkan" },
     respawn: { icon: "♻ RESPAWN",  sub: "kill+respawn" },
+    ban:     { icon: "🔨 BAN",      sub: "permanen/temp" },
     disable: type === "anim" 
       ? { icon: "🔄 REFRESH", sub: "LoadCharacter" } 
       : { icon: "👕 NAKED", sub: "hapus baju" },

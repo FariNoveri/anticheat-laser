@@ -46,6 +46,8 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [latestVersion, setLatestVersion] = useState("5.4");
   const [kickMsgAvatar, setKickMsgAvatar] = useState("");
   const [kickMsgAnim, setKickMsgAnim] = useState("");
+  const [banDuration, setBanDuration] = useState("86400");
+  const [banReason, setBanReason] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
   const [webhookNotifAvatar, setWNA] = useState(true);
   const [webhookNotifAnim, setWNN] = useState(true);
@@ -68,6 +70,8 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       if (d.latest_version) setLatestVersion(d.latest_version);
       if (d.kick_message_avatar) setKickMsgAvatar(d.kick_message_avatar);
       if (d.kick_message_anim) setKickMsgAnim(d.kick_message_anim);
+      if (d.ban_duration) setBanDuration(d.ban_duration);
+      if (d.ban_reason) setBanReason(d.ban_reason);
       if (d.webhook_url) setWebhookUrl(d.webhook_url);
       setWNA(d.webhook_notify_avatar !== false);
       setWNN(d.webhook_notify_anim !== false);
@@ -155,15 +159,25 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
         </div>
       </div>
 
-      {/* Kick Messages */}
+      {/* Kick Messages & Ban Settings */}
       <div className="global-section" style={{ marginBottom: 32 }}>
         <div className="global-header">
-          <div className="global-title">💬 Kick Messages</div>
+          <div className="global-title">💬 Messages & Ban Settings</div>
           <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>Overrideable per game</div>
         </div>
         <div className="global-body">
           {msgRow("Default Kick Message — Avatar", "[AC] Avatar dilarang terdeteksi!", kickMsgAvatar, setKickMsgAvatar, "kick_message_avatar")}
           {msgRow("Default Kick Message — Animation", "[AC] Animasi dilarang terdeteksi!", kickMsgAnim, setKickMsgAnim, "kick_message_anim")}
+          
+          {(pmAvatar === "ban" || pmAnim === "ban") && (
+            <>
+              <div style={{ marginTop: 24, marginBottom: 12, borderTop: "1px dashed var(--border)", paddingTop: 16 }}>
+                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)" }}>🔨 Ban Settings</span>
+              </div>
+              {msgRow("Default Ban Duration (Detik)", "Default: 86400 (1 Hari). -1 = Permanen", banDuration, setBanDuration, "ban_duration", { background: "var(--accent)", color: "#000" })}
+              {msgRow("Default Ban Reason", "Security Violation: Prohibited Avatar/Animation detected.", banReason, setBanReason, "ban_reason", { background: "var(--accent)", color: "#000" })}
+            </>
+          )}
         </div>
       </div>
 

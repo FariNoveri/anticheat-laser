@@ -14,6 +14,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
   const [customExpiry, setCustomExpiry] = useState("");
   const [kmAvatar, setKmAvatar] = useState("");
   const [kmAnim, setKmAnim] = useState("");
+  const [banDur, setBanDur] = useState("");
+  const [banRsn, setBanRsn] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
   const [wNotifAvatar, setWNA] = useState(true);
   const [wNotifAnim, setWNN] = useState(true);
@@ -41,6 +43,8 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
       setPmAnim(g.punishment_mode_anim || "global");
       setKmAvatar(g.kick_message_avatar || "");
       setKmAnim(g.kick_message_anim || "");
+      setBanDur(g.ban_duration || "");
+      setBanRsn(g.ban_reason || "");
       setWebhookUrl(g.webhook_url || "");
       setWNA(g.webhook_notify_avatar !== false);
       setWNN(g.webhook_notify_anim !== false);
@@ -171,6 +175,17 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
         <label className="modal-label" style={{ marginTop: 8 }}>⚔ Punishment — Animation Detection</label>
         <PunishModeGrid type="anim" value={pmAnim} onChange={setPmAnim} allowGlobal={true} />
 
+        {/* Ban Settings Conditional */}
+        {(pmAvatar === "ban" || pmAnim === "ban") && (
+          <div style={{ marginTop: 16, marginBottom: 16, background: "rgba(0, 255, 204, 0.05)", border: "1px dashed var(--accent)", padding: 12, borderRadius: 8 }}>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)", display: "block", marginBottom: 8 }}>🔨 Custom Ban Settings (Per Game)</span>
+            <label className="modal-label" style={{ color: "var(--text)" }}>Custom Ban Duration (Detik)</label>
+            <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Kosong = pakai global. -1 = Permanen" value={banDur} onChange={(e) => setBanDur(e.target.value)} />
+            <label className="modal-label" style={{ color: "var(--text)" }}>Custom Ban Reason</label>
+            <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Kosong = pakai global" value={banRsn} onChange={(e) => setBanRsn(e.target.value)} />
+          </div>
+        )}
+
         {/* Webhook Override */}
         <div className="webhook-block">
           <span className="webhook-label">🔔 Discord Webhook Override (per game)</span>
@@ -238,7 +253,7 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
         <label className="modal-label" style={{ marginTop: 16 }}>Custom Kick Message — Avatar</label>
         <input className="modal-input" placeholder="Kosong = pakai pesan global" value={kmAvatar} onChange={(e) => setKmAvatar(e.target.value)} />
         <label className="modal-label">Custom Kick Message — Anim</label>
-        <input className="modal-input" placeholder="Kosong = pakai pesan global" value={kmAnim} onChange={(e) => setKmAnim(e.target.value)} />
+        <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Kosong = pakai pesan global" value={kmAnim} onChange={(e) => setKmAnim(e.target.value)} />
 
         <div className="modal-actions">
           <button className="btn" onClick={onClose}>CANCEL</button>

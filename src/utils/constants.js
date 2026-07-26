@@ -4,6 +4,7 @@ export const pmDesc = (type) => ({
   disable: type === "anim" 
     ? "Karakter player di-refresh (LoadCharacter) secara instan."
     : "Semua pakaian, aksesoris, dan mesh pada avatar akan dihapus (Naked).",
+  ban: "Player akan dibanned secara permanen atau sementara lewat BanAsync API.",
 });
 
 // ASSET_TYPE_MAP removed — only body-part controls are supported now. (Restored Clothing/Accessories)
