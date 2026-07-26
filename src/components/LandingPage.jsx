@@ -55,7 +55,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="cutecore-hero">
         <div className="hero-content">
-          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.4</div>
+          <div style={{ display: "inline-block", background: "#ff66b2", color: "#fff", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>LATEST VERSION 5.5</div>
           <h1>The Cutest, Most Powerful<br/>Roblox Anti-Cheat</h1>
           <p>Protect your games from exploiters with our ultra-fast, server-sided validation system. Real-time Discord webhooks, zero false positives, and 100% bypass-proof. <br/><strong>100% Safe & Compliant with Roblox TOS.</strong></p>
           <button className="cutecore-btn" onClick={() => document.getElementById("pricing").scrollIntoView({behavior: "smooth"})}>
@@ -250,6 +250,16 @@ export default function LandingPage() {
             </div>
             <div style={{ padding: "20px", overflowY: "auto", textAlign: "left" }}>
               <div style={{ background: "rgba(255, 102, 178, 0.1)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff1493" }}>
+                <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.5 — Ban API Integration</h3>
+                <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
+                  <li>Added support for Roblox's new BanAsync for permanent and temporary bans.</li>
+                  <li>Ban Duration and Ban Reason can now be configured directly via the Web Dashboard.</li>
+                  <li>Instant neutralization: Cheaters are instantly hidden and kicked from the game while the ban propagates in the background.</li>
+                  <li>Professional presets: Ban reasons automatically specify if the ban was due to an Avatar Item or an Animation detection.</li>
+                </ul>
+              </div>
+
+              <div style={{ background: "rgba(255, 102, 178, 0.05)", padding: "20px 25px", borderRadius: "15px", marginBottom: "20px", borderLeft: "5px solid #ff99cc" }}>
                 <h3 style={{ margin: "0 0 10px 0", color: "#5c3a4f" }}>v5.4 — Payload Encryption & Modularity</h3>
                 <ul style={{ margin: 0, paddingLeft: "20px", color: "#8c5a77", lineHeight: "1.6" }}>
                   <li>Added Luraph-style Custom Payload Encryption for ultimate API protection.</li>
