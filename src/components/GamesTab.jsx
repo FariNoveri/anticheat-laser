@@ -179,7 +179,7 @@ export function GameModal({ show, onClose, onSave, editingGame, editingGameId })
         {(pmAvatar === "ban" || pmAnim === "ban") && (
           <div style={{ marginTop: 16, marginBottom: 16, background: "rgba(0, 255, 204, 0.05)", border: "1px dashed var(--accent)", padding: 12, borderRadius: 8 }}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)", display: "block", marginBottom: 8 }}>🔨 Custom Ban Settings (Per Game)</span>
-            <label className="modal-label" style={{ color: "var(--text)" }}>Custom Ban Duration (Detik)</label>
+            <label className="modal-label" style={{ color: "var(--text)" }}>Custom Ban Duration (Hari)</label>
             <input className="modal-input" style={{ marginBottom: 10 }} placeholder="Kosong = pakai global. -1 = Permanen" value={banDur} onChange={(e) => setBanDur(e.target.value)} />
             <label className="modal-label" style={{ color: "var(--text)" }}>Custom Ban Reason</label>
             <input className="modal-input" style={{ marginBottom: 0 }} placeholder="Kosong = pakai global" value={banRsn} onChange={(e) => setBanRsn(e.target.value)} />

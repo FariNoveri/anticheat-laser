@@ -46,7 +46,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [latestVersion, setLatestVersion] = useState("5.4");
   const [kickMsgAvatar, setKickMsgAvatar] = useState("");
   const [kickMsgAnim, setKickMsgAnim] = useState("");
-  const [banDuration, setBanDuration] = useState("86400");
+  const [banDuration, setBanDuration] = useState("1");
   const [banReason, setBanReason] = useState("");
   const [webhookUrl, setWebhookUrl] = useState("");
   const [webhookNotifAvatar, setWNA] = useState(true);
@@ -174,7 +174,7 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
               <div style={{ marginTop: 24, marginBottom: 12, borderTop: "1px dashed var(--border)", paddingTop: 16 }}>
                 <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)" }}>🔨 Ban Settings</span>
               </div>
-              {msgRow("Default Ban Duration (Detik)", "Default: 86400 (1 Hari). -1 = Permanen", banDuration, setBanDuration, "ban_duration", { background: "var(--accent)", color: "#000" })}
+              {msgRow("Default Ban Duration (Hari)", "Default: 1 (Hari). Isi -1 untuk Permanen", banDuration, setBanDuration, "ban_duration", { background: "var(--accent)", color: "#000" })}
               {msgRow("Default Ban Reason", "Security Violation: Prohibited Avatar/Animation detected.", banReason, setBanReason, "ban_reason", { background: "var(--accent)", color: "#000" })}
             </>
           )}
