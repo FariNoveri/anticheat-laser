@@ -387,3 +387,75 @@
   from { opacity: 0; transform: scale(0.8) translateY(20px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .cutecore-nav {
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 15px;
+  }
+  
+  .cutecore-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .cutecore-nav-links a {
+    margin-left: 0;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .cutecore-hero {
+    padding: 80px 20px 60px 20px;
+  }
+
+  .cutecore-hero h1 {
+    font-size: 36px;
+  }
+
+  .cutecore-hero p {
+    font-size: 16px;
+  }
+
+  .cutecore-features {
+    padding: 30px 15px;
+  }
+
+  .cutecore-card {
+    width: 100%;
+    max-width: 320px;
+    padding: 30px 20px;
+  }
+
+  .cutecore-pricing {
+    padding: 50px 15px;
+  }
+
+  .cutecore-pricing h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .pricing-grid {
+    gap: 20px;
+  }
+
+  .pricing-card {
+    width: 100%;
+    max-width: 320px;
+    padding: 30px 20px;
+  }
+
+  .price {
+    font-size: 38px;
+  }
+  
+  .modal-content {
+    max-height: 90vh;
+  }
+}
+
