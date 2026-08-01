@@ -100,8 +100,18 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
         {rows.map((row, i) => (
           <div key={i} style={{ background: "var(--bg)", border: "1px solid var(--border)", padding: 12, marginBottom: 10 }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr auto 28px", gap: 6, alignItems: "center", marginBottom: 8 }}>
-              <input className="modal-input" placeholder="Item ID" style={{ margin: 0 }}
-                value={row.id} onChange={(e) => update(i, { id: e.target.value })} />
+              <input className="modal-input" placeholder="Item ID / Link Roblox (Fast)" style={{ margin: 0 }}
+                value={row.id} onChange={(e) => {
+                  const val = e.target.value;
+                  const match = val.match(/(?:catalog|library|bundles|asset)\/(\d+)\/?([^/?#]+)?/i);
+                  if (match) {
+                    const extractedId = match[1];
+                    const extractedName = match[2] ? decodeURIComponent(match[2]).replace(/-/g, " ") : "";
+                    update(i, { id: extractedId, note: extractedName || row.note });
+                  } else {
+                    update(i, { id: val });
+                  }
+                }} />
               <button className="btn blue" style={{ padding: "6px 12px", fontSize: 11 }}
                 onClick={() => fetchInfo(i)} disabled={row.fetching}>
                 {row.fetching ? "..." : "🔍 Auto"}

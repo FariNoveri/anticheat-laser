@@ -1,0 +1,6 @@
+name = "my-react-app"
+main = "index.js"
+compatibility_date = "2023-01-01"
+
+[vars]
+FIREBASE_SECRET = "7IkReFEvl3Ek9Npuip36zociFO14pAmY5MMikq9B"
