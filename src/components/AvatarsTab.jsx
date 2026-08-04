@@ -107,7 +107,20 @@ function AvatarModal({ show, onClose, onSave, scope, allGames, editRow, onlyBody
                   if (match) {
                     const extractedId = match[1];
                     const extractedName = match[2] ? decodeURIComponent(match[2]).replace(/-/g, " ") : "";
-                    update(i, { id: extractedId, note: extractedName || row.note });
+                    
+                    let autoPart = row.part;
+                    if (onlyBody) {
+                      const lower = val.toLowerCase();
+                      if (lower.includes("/bundles/")) autoPart = "FullBody";
+                      else if (lower.includes("torso")) autoPart = "Torso";
+                      else if (lower.includes("left-arm") || lower.includes("leftarm") || lower.includes("left arm")) autoPart = "LeftArm";
+                      else if (lower.includes("right-arm") || lower.includes("rightarm") || lower.includes("right arm")) autoPart = "RightArm";
+                      else if (lower.includes("left-leg") || lower.includes("leftleg") || lower.includes("left leg")) autoPart = "LeftLeg";
+                      else if (lower.includes("right-leg") || lower.includes("rightleg") || lower.includes("right leg")) autoPart = "RightLeg";
+                      else if (lower.includes("head") || lower.includes("face")) autoPart = "Head";
+                    }
+                    
+                    update(i, { id: extractedId, note: extractedName || row.note, part: autoPart });
                   } else {
                     update(i, { id: val });
                   }
