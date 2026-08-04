@@ -145,7 +145,7 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
   const handleSave = async (rows, oldId) => {
     let added = 0, updated = 0, skipped = 0;
     for (const row of rows) {
-      const existing = isGlobal ? allAnims.global[row.id] : allAnims.per_game?.[scope]?.[row.id];
+      const existing = isGlobal ? allAnims.global?.[row.id] : allAnims.per_game?.[scope]?.[row.id];
       if (existing && !oldId) { skipped++; continue; }
       const entry = { note: row.note, added_at: existing?.added_at || Math.floor(Date.now() / 1000), ...(row.name && { name: row.name }), ...(row.storeUrl && { store_url: row.storeUrl }) };
       await saveAnim(scope, row.id, entry, oldId !== row.id ? oldId : null);
