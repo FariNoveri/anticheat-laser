@@ -211,10 +211,9 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
     let added = 0, updated = 0, skipped = 0;
     for (const row of rows) {
       const existing = isGlobal ? allAvatars.global?.[row.id] : allAvatars.per_game?.[scope]?.[row.id];
-      if (existing && !oldId) { skipped++; continue; }
       const entry = { part: row.part, note: row.note || row.name, added_at: existing?.added_at || Math.floor(Date.now() / 1000) };
       await saveAvatar(scope, row.id, entry, oldId !== row.id ? oldId : null);
-      oldId ? updated++ : added++;
+      if (existing && !oldId) { updated++; } else if (oldId) { updated++; } else { added++; }
     }
     setShowModal(false);
     showToast(`✅ ${[added && `${added} added`, updated && `${updated} updated`, skipped && `${skipped} skipped`].filter(Boolean).join(", ")}!`);
