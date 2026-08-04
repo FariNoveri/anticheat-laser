@@ -325,13 +325,20 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
                 <input type="checkbox" style={{ cursor: "pointer", accentColor: "var(--accent5)" }}
                   onChange={(e) => e.target.checked ? setSelected(filtered) : clearSel()} />
               </th>
-              <th>Item ID</th><th>Part / Type</th><th>Category</th><th>Note</th><th>Added</th><th>Status</th><th></th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 40, width: 40, padding: "8px" }}>No.</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 100, padding: "8px" }}>Item ID</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 100, padding: "8px" }}>Part / Type</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 100, padding: "8px" }}>Category</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 150, padding: "8px" }}>Note</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 80, padding: "8px" }}>Added</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 80, padding: "8px" }}>Status</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {!filtered.length
-              ? <tr><td colSpan={8}><div className="state-msg"><span className="big">🦴</span>{onlyBody ? "No banned body items" : `No banned items${catFilter !== "all" ? " in this category" : ""}`}</div></td></tr>
-              : filtered.slice(0, visibleCount).map((id) => {
+              ? <tr><td colSpan={9}><div className="state-msg"><span className="big">🦴</span>{onlyBody ? "No banned body items" : `No banned items${catFilter !== "all" ? " in this category" : ""}`}</div></td></tr>
+              : filtered.slice(0, visibleCount).map((id, index) => {
                   const gData  = allAvatars.global?.[id];
                   const pgData = allAvatars.per_game?.[scope]?.[id];
                   const excluded = !isGlobal && !!allAvatars.excluded?.[scope]?.[id];
@@ -349,11 +356,12 @@ export default function AvatarsTab({ allAvatars, allGames, saveAvatar, deleteAva
                   else               statusEl = <span className="badge" style={{ color: "#333", borderColor: "#222" }}>—</span>;
 
                   return (
-                    <tr key={id}>
+                    <tr key={id} className={selected.includes(id) ? "selected" : ""}>
                       <td>
                         <input type="checkbox" checked={selected.includes(id)} onChange={() => toggleSel(id)}
                           style={{ cursor: "pointer", accentColor: "var(--accent5)" }} />
                       </td>
+                      <td style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textAlign: "center" }}>{index + 1}</td>
                       <td>
                         <span style={{ color: "var(--accent5)", cursor: "pointer", fontFamily: "var(--mono)", fontSize: 11 }}
                           onClick={() => navigator.clipboard.writeText(id)}>{id}</span>

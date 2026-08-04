@@ -251,13 +251,18 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
                 <input type="checkbox" style={{ cursor: "pointer", accentColor: "var(--accent4)" }}
                   onChange={(e) => e.target.checked ? setSelected(filtered) : clearSel()} />
               </th>
-              <th>Animation ID</th><th>Note</th><th>Added</th><th>Status</th><th></th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 40, width: 40, padding: "8px" }}>No.</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 120, padding: "8px" }}>Animation ID</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 150, padding: "8px" }}>Note</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 80, padding: "8px" }}>Added</th>
+              <th style={{ resize: "horizontal", overflow: "hidden", minWidth: 80, padding: "8px" }}>Status</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {!filtered.length
-              ? <tr><td colSpan={7}><div className="state-msg"><span className="big">🎭</span>No banned animations</div></td></tr>
-              : filtered.slice(0, visibleCount).map((id) => {
+              ? <tr><td colSpan={8}><div className="state-msg"><span className="big">🎭</span>No banned animations</div></td></tr>
+              : filtered.slice(0, visibleCount).map((id, index) => {
                   const gData  = allAnims.global?.[id];
                   const pgData = allAnims.per_game?.[scope]?.[id];
                   const excluded = !isGlobal && !!allAnims.excluded?.[scope]?.[id];
@@ -273,11 +278,12 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
                   else                   statusEl = <span className="badge" style={{ color: "#333", borderColor: "#222" }}>—</span>;
 
                   return (
-                    <tr key={id}>
+                    <tr key={id} className={selected.includes(id) ? "selected" : ""}>
                       <td>
                         <input type="checkbox" className="anim-check" checked={selected.includes(id)} onChange={() => toggleSel(id)}
                           style={{ cursor: "pointer", accentColor: "var(--accent4)" }} />
                       </td>
+                      <td style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textAlign: "center" }}>{index + 1}</td>
                       <td>
                         <span style={{ color: "var(--accent4)", cursor: "pointer", fontFamily: "var(--mono)", fontSize: 11 }}
                           onClick={() => navigator.clipboard.writeText(id)}>{id}</span>
