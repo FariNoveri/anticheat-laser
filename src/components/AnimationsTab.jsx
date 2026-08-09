@@ -180,6 +180,20 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
       return;
     }
 
+    if (action === "copy") {
+      if (!confirm(`Copy ${selected.length} animation(s) to ${targetScope === "global" ? "Global" : allGames[targetScope]?.name || targetScope}?`)) return;
+      let copied = 0;
+      for (const id of selected) {
+        const data = isGlobal ? allAnims.global?.[id] : allAnims.per_game?.[scope]?.[id];
+        if (!data) continue;
+        await saveAnim(targetScope, id, data);
+        copied++;
+      }
+      clearSel();
+      showToast(`✅ Copied ${copied} animation(s) to ${targetScope === "global" ? "Global" : allGames[targetScope]?.name || targetScope}!`);
+      return;
+    }
+
     if (!confirm(`${action.toUpperCase()} ${selected.length} animation(s)?`)) return;
     for (const id of selected) {
       if (action === "delete")  await deleteAnim(scope, id);
@@ -224,13 +238,22 @@ export default function AnimationsTab({ allAnims, allGames, saveAnim, deleteAnim
               style={{ margin: 0, width: "auto", fontSize: 10, padding: "4px 8px", minHeight: 24 }}
               value=""
               onChange={(e) => {
-                if (e.target.value) bulkAction("move", e.target.value);
+                if (e.target.value) {
+                  const [act, target] = e.target.value.split(":");
+                  bulkAction(act, target);
+                }
               }}
             >
-              <option value="" disabled>➡️ Move to...</option>
-              {scope !== "global" && <option value="global">🌍 Global</option>}
+              <option value="" disabled>➡️ Move / Copy...</option>
+              {scope !== "global" && <option value="move:global">📦 Move to Global</option>}
+              {scope !== "global" && <option value="copy:global">📋 Copy to Global</option>}
               {Object.entries(allGames).map(([id, g]) => (
-                scope !== id ? <option key={id} value={id}>🎮 {g.name || id}</option> : null
+                scope !== id ? (
+                  <React.Fragment key={id}>
+                    <option value={`move:${id}`}>📦 Move to {g.name || id}</option>
+                    <option value={`copy:${id}`}>📋 Copy to {g.name || id}</option>
+                  </React.Fragment>
+                ) : null
               ))}
             </select>
             <button className="btn sm" onClick={clearSel}>✕ Clear</button>
