@@ -11,7 +11,6 @@ import { ForcePushBar, GlobalControls, ServerHealthMonitor } from "./components/
 import GamesTab, { GameModal } from "./components/GamesTab";
 import AnimationsTab from "./components/AnimationsTab";
 import AvatarsTab from "./components/AvatarsTab";
-import AnnounceTab from "./components/AnnounceTab";
 import HistoryTab from "./components/HistoryTab";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
@@ -149,13 +148,7 @@ function AdminApp() {
             />
           )}
 
-          {activeTab === "announce" && (
-            <AnnounceTab
-              allGames={store.allGames}
-              showToast={showToast}
-            />
           )}
-
           {activeTab === "history" && <HistoryTab />}
         </div>
       </main>

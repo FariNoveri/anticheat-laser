@@ -4,7 +4,6 @@ import { auth } from "../firebase/config";
 
 const TABS = [
   { id: "dashboard", label: "📊 DASHBOARD" },
-  { id: "announce",  label: "📢 ANNOUNCE" },
   { id: "games",     label: "🎮 GAMES" },
   { id: "emotes",    label: "🎭 EMOTE / ANIM" },
   { id: "body",      label: "🦴 BODY" },
