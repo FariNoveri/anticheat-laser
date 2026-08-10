@@ -48,16 +48,6 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
   const [kickMsgAnim, setKickMsgAnim] = useState("");
   const [banDuration, setBanDuration] = useState("1");
   const [banReason, setBanReason] = useState("");
-  const [webhookUrl, setWebhookUrl] = useState("");
-  const [webhookNotifAvatar, setWNA] = useState(true);
-  const [webhookNotifAnim, setWNN] = useState(true);
-  const [webhookReasonAvatar, setWRA] = useState("");
-  const [webhookReasonAnim, setWRN] = useState("");
-  const [webhookTitleAvatar, setWTA] = useState("");
-  const [webhookColorAvatar, setWCA] = useState("");
-  const [webhookTitleAnim, setWTN] = useState("");
-  const [webhookColorAnim, setWCN] = useState("");
-  const [webhookFooter, setWF] = useState("");
 
   useEffect(() => {
     return onValue(ref(db, "global"), (snap) => {
@@ -72,16 +62,6 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
       if (d.kick_message_anim) setKickMsgAnim(d.kick_message_anim);
       if (d.ban_duration) setBanDuration(d.ban_duration);
       if (d.ban_reason) setBanReason(d.ban_reason);
-      if (d.webhook_url) setWebhookUrl(d.webhook_url);
-      setWNA(d.webhook_notify_avatar !== false);
-      setWNN(d.webhook_notify_anim !== false);
-      if (d.webhook_reason_avatar) setWRA(d.webhook_reason_avatar);
-      if (d.webhook_reason_anim) setWRN(d.webhook_reason_anim);
-      if (d.webhook_title_avatar) setWTA(d.webhook_title_avatar);
-      if (d.webhook_color_avatar) setWCA(d.webhook_color_avatar);
-      if (d.webhook_title_anim) setWTN(d.webhook_title_anim);
-      if (d.webhook_color_anim) setWCN(d.webhook_color_anim);
-      if (d.webhook_footer) setWF(d.webhook_footer);
     });
   }, []);
 
@@ -178,58 +158,6 @@ export function GlobalControls({ setGlobal, saveGlobalMsg, showToast }) {
               {msgRow("Default Ban Reason", "Security Violation: Prohibited Avatar/Animation detected.", banReason, setBanReason, "ban_reason", { background: "var(--accent)", color: "#000" })}
             </>
           )}
-        </div>
-      </div>
-
-      {/* Discord Webhook */}
-      <div className="global-section" style={{ marginBottom: 32 }}>
-        <div className="global-header">
-          <div className="global-title" style={{ color: "#5865F2" }}>🔔 Discord Webhook</div>
-          <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted)" }}>Global notif settings</div>
-        </div>
-        <div className="global-body">
-          <label className="modal-label">Webhook URL</label>
-          <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-            <input className="modal-input" style={{ margin: 0, flex: 1 }}
-              placeholder="https://discord.com/api/webhooks/..."
-              value={webhookUrl} onChange={(e) => setWebhookUrl(e.target.value)} />
-            <button className="btn" style={{ borderColor: "#5865F2", color: "#5865F2" }}
-              onClick={() => handleMsg("webhook_url", webhookUrl)}>SAVE</button>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
-            <div>
-              <label className="modal-label">Notif — Avatar Detect</label>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Switch checked={webhookNotifAvatar} onChange={(v) => { setWNA(v); handleGlobal("webhook_notify_avatar", v); }} />
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)" }}>Kirim notif avatar</span>
-              </div>
-            </div>
-            <div>
-              <label className="modal-label">Notif — Anim Detect</label>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Switch checked={webhookNotifAnim} onChange={(v) => { setWNN(v); handleGlobal("webhook_notify_anim", v); }} />
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)" }}>Kirim notif anim</span>
-              </div>
-            </div>
-          </div>
-
-          {msgRow("Custom Reason — Avatar Notif", "Penggunaan avatar item yang dilarang", webhookReasonAvatar, setWRA, "webhook_reason_avatar",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-          {msgRow("Custom Title — Avatar Notif", "🚨 Player — Banned Avatar Item", webhookTitleAvatar, setWTA, "webhook_title_avatar",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-          {msgRow("Custom Color (Hex) — Avatar Notif", "e.g. #ff0000", webhookColorAvatar, setWCA, "webhook_color_avatar",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-
-          {msgRow("Custom Reason — Anim Notif", "Penggunaan animasi yang dilarang", webhookReasonAnim, setWRN, "webhook_reason_anim",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-          {msgRow("Custom Title — Anim Notif", "🚨 Player — Banned Animation", webhookTitleAnim, setWTN, "webhook_title_anim",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-          {msgRow("Custom Color (Hex) — Anim Notif", "e.g. #ffaa00", webhookColorAnim, setWCN, "webhook_color_anim",
-            { borderColor: "#5865F2", color: "#5865F2" })}
-
-          {msgRow("Custom Footer — Notif", "Atlas Club Anti-Cheat", webhookFooter, setWF, "webhook_footer",
-            { borderColor: "#5865F2", color: "#5865F2" })}
         </div>
       </div>
     </>
