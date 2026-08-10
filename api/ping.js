@@ -26,9 +26,9 @@ export default async function handler(req, res) {
     if (response.ok) {
       return res.status(200).json({ status: "ok", latency });
     } else {
-      return res.status(response.status).json({ status: "error", code: response.status });
+      return res.status(200).json({ status: "error", code: response.status });
     }
   } catch (error) {
-    return res.status(500).json({ status: "error", message: error.message });
+    return res.status(200).json({ status: "error", code: 'DOWN' });
   }
 }
