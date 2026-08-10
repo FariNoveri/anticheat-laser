@@ -346,11 +346,15 @@ export function ServerHealthMonitor() {
 
     for (const [key, url] of Object.entries(endpoints)) {
       try {
-        const start = Date.now();
-        const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(5000) });
+        const pingUrl = `/api/ping?url=${encodeURIComponent(url)}`;
+        const res = await fetch(pingUrl, { cache: "no-store", signal: AbortSignal.timeout(10000) });
         if (res.ok) {
-          const latency = Date.now() - start;
-          setHealth(prev => ({ ...prev, [key]: { status: 'ok', latency } }));
+          const data = await res.json();
+          if (data.status === 'ok') {
+            setHealth(prev => ({ ...prev, [key]: { status: 'ok', latency: data.latency } }));
+          } else {
+            setHealth(prev => ({ ...prev, [key]: { status: 'error', error: data.code || 'ERR' } }));
+          }
         } else {
           setHealth(prev => ({ ...prev, [key]: { status: 'error', error: res.status } }));
         }
