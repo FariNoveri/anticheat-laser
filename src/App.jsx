@@ -148,7 +148,6 @@ function AdminApp() {
             />
           )}
 
-          )}
           {activeTab === "history" && <HistoryTab />}
         </div>
       </main>
