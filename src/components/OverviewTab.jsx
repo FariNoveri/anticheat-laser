@@ -341,7 +341,7 @@ export function ServerHealthMonitor() {
     const endpoints = {
       vercel: "https://my-react-app-farinoveris-projects.vercel.app/api/fb-proxy2?path=%2Fglobal%2Fupdated_at",
       netlify: "https://my-react-app-farinoveris.netlify.app/.netlify/functions/fb-proxy2?path=%2Fglobal%2Fupdated_at",
-      cloudflare: "https://cf-proxy.farinoveri.workers.dev?path=%2Fglobal%2Fupdated_at"
+      cloudflare: "https://my-react-app.cahayalunamaharani1.workers.dev?path=%2Fglobal%2Fupdated_at"
     };
 
     for (const [key, url] of Object.entries(endpoints)) {
