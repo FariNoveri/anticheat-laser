@@ -7,7 +7,7 @@ import { useStore } from "./hooks/useStore";
 import LoginScreen from "./components/LoginScreen";
 import Header from "./components/Header";
 import { Toast, ConfirmDeleteModal } from "./components/UI";
-import { ForcePushBar, GlobalControls } from "./components/OverviewTab";
+import { ForcePushBar, GlobalControls, ServerHealthMonitor } from "./components/OverviewTab";
 import GamesTab, { GameModal } from "./components/GamesTab";
 import AnimationsTab from "./components/AnimationsTab";
 import AvatarsTab from "./components/AvatarsTab";
@@ -94,6 +94,7 @@ function AdminApp() {
                 <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>📊 Dashboard</div>
                 <div style={{ color: "var(--muted)", fontSize: 12 }}>Realtime push, global controls, dan webhook settings.</div>
               </div>
+              <ServerHealthMonitor />
               <ForcePushBar onPush={async () => {
                 try { await store.touchUpdatedAt(); showToast("⚡ Config dipush! Server Roblox akan update dalam ~2 detik"); }
                 catch (e) { showToast("Failed: " + e.message, "error"); }

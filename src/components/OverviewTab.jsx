@@ -330,3 +330,72 @@ export default function OverviewTab({ allGames, toggleGame, loadAll, showToast, 
     </div>
   );
 }
+
+// ── Server Health Monitor ─────────────────────────────────
+export function ServerHealthMonitor() {
+  const [health, setHealth] = useState({ vercel: null, netlify: null, cloudflare: null });
+
+  const checkHealth = async () => {
+    setHealth({ vercel: 'loading', netlify: 'loading', cloudflare: 'loading' });
+    
+    const endpoints = {
+      vercel: "https://my-react-app-farinoveris-projects.vercel.app/api/fb-proxy2?path=%2Fglobal%2Fupdated_at",
+      netlify: "https://my-react-app-farinoveris.netlify.app/.netlify/functions/fb-proxy2?path=%2Fglobal%2Fupdated_at",
+      cloudflare: "https://cf-proxy.farinoveri.workers.dev?path=%2Fglobal%2Fupdated_at"
+    };
+
+    for (const [key, url] of Object.entries(endpoints)) {
+      try {
+        const start = Date.now();
+        const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(5000) });
+        if (res.ok) {
+          const latency = Date.now() - start;
+          setHealth(prev => ({ ...prev, [key]: { status: 'ok', latency } }));
+        } else {
+          setHealth(prev => ({ ...prev, [key]: { status: 'error', error: res.status } }));
+        }
+      } catch (e) {
+        setHealth(prev => ({ ...prev, [key]: { status: 'error', error: 'TIMEOUT/DOWN' } }));
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkHealth();
+    const interval = setInterval(checkHealth, 30000); // Check every 30s
+    return () => clearInterval(interval);
+  }, []);
+
+  const renderStatus = (data) => {
+    if (data === 'loading') return <span style={{ color: "var(--accent4)" }}>⏳ PINGING...</span>;
+    if (!data) return <span style={{ color: "var(--muted)" }}>—</span>;
+    if (data.status === 'ok') return <span style={{ color: "var(--accent)" }}>✅ AMAN ({data.latency}ms)</span>;
+    return <span style={{ color: "var(--accent2)" }}>❌ DOWN / LIMIT ({data.error})</span>;
+  };
+
+  return (
+    <div className="card" style={{ marginBottom: 16 }}>
+      <div className="card-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span>🛜 Server API Health (v5.6 Auto-Fallback)</span>
+        <button className="btn sm" onClick={checkHealth}>🔄 REFRESH</button>
+      </div>
+      <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: "1px solid var(--border)", paddingBottom: 8 }}>
+          <span style={{ fontWeight: "bold" }}>🌍 Vercel (Primary)</span>
+          <span style={{ textAlign: "right", fontFamily: "var(--mono)" }}>{renderStatus(health.vercel)}</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: "1px solid var(--border)", paddingBottom: 8 }}>
+          <span style={{ fontWeight: "bold" }}>🌍 Netlify (Backup 1)</span>
+          <span style={{ textAlign: "right", fontFamily: "var(--mono)" }}>{renderStatus(health.netlify)}</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+          <span style={{ fontWeight: "bold" }}>☁️ Cloudflare (Backup 2)</span>
+          <span style={{ textAlign: "right", fontFamily: "var(--mono)" }}>{renderStatus(health.cloudflare)}</span>
+        </div>
+        <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 8, fontStyle: "italic" }}>
+          * Script Roblox v5.6 akan mencoba server dari atas ke bawah. Jika satu mati, otomatis loncat ke bawahnya.
+        </div>
+      </div>
+    </div>
+  );
+}
